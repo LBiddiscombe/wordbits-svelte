@@ -1,0 +1,13 @@
+Scratchpad for keeping useful references used and can link to the about page later...
+
+https://designshack.net/articles/css/inner-shadows-in-css-images-text-and-beyond/
+/* 
+    Add this to .content in Tile.svelte for INSET effect
+    background-color: #565656;
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+
+  */
