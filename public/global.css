@@ -1,3 +1,12 @@
+:root {
+  --text-dark: #2e2e2eff;
+  --text-light: #ffffffff;
+  --brand-dark: #14213dff;
+  --brand-light: #e5e5e5ff;
+  --brand-accent: #fca311ff;
+  --text-error: #e63946ff;
+}
+
 html,
 body {
   position: relative;
