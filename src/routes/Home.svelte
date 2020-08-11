@@ -1,5 +1,5 @@
 <script>
-
+  import { fade } from 'svelte/transition'
 </script>
 
 <style>
@@ -9,6 +9,6 @@
   }
 </style>
 
-<div class="page">
+<div in:fade={{ duration: 500 }} class="page">
   <h1>Home</h1>
 </div>
