@@ -1,22 +1,35 @@
 <script>
   import Router from 'svelte-spa-router'
   import routes from './routes'
+  import Header from './components/Header.svelte'
+  import Aside from './components/Aside.svelte'
+
+  let asideOpen = false
+
+  function onNavigate() {
+    asideOpen = false
+  }
 </script>
 
 <style>
-  nav {
-    width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
+  main {
+    width: calc(100vw - 2rem);
+    max-width: 1200px;
+    border-radius: 0.25rem;
+    min-height: calc(100vh - 6.25rem);
+    height: calc(100vh - 6.25rem);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    background-color: var(--text-light);
+    margin: 0 auto;
+    margin-top: -2rem;
+    z-index: 2;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
 </style>
 
-<nav>
-  <a href="/#">Home</a>
-  <a href="#/game">Game</a>
-  <a href="#/search">Search</a>
-</nav>
-
-<Router {routes} />
+<Header bind:checked={asideOpen} />
+<Aside open={asideOpen} on:click={onNavigate} />
+<main>
+  <Router {routes} />
+</main>

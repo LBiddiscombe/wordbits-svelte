@@ -5,7 +5,13 @@
 <style>
   .page {
     display: grid;
+    height: 100%;
     place-items: center;
+    border-radius: 0.5rem;
+  }
+
+  h1 {
+    text-align: center;
   }
 </style>
 
