@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import { shuffle } from '../utils/shuffle'
+import { shuffle } from '../utils'
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 

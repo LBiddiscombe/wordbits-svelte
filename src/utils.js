@@ -6,3 +6,10 @@ export function shuffle(array) {
 
   return array
 }
+
+export function groupBy(array, key) {
+  return array.reduce(function (item, x) {
+    ;(item[x[key]] = item[x[key]] || []).push(x)
+    return item
+  }, {})
+}

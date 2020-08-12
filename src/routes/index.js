@@ -1,4 +1,4 @@
-import Home from './Home.svelte'
+import Home from './Home/Home.svelte'
 import Game from './Game/Game.svelte'
 import Word from './Word.svelte'
 

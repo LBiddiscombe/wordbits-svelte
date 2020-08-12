@@ -1,0 +1,39 @@
+<script>
+  import { fly } from 'svelte/transition'
+  import WordList from './WordList.svelte'
+  import { groupBy } from '../../utils'
+
+  export let results = {}
+
+  let groups = groupBy(results, 'length')
+</script>
+
+<style>
+  .wrapper {
+    width: calc(100% - 2rem);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(32ch, 1fr));
+    grid-gap: 1rem;
+  }
+
+  .wordlist {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--brand-accent);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 0.25rem;
+    padding-bottom: rem;
+  }
+</style>
+
+<div class="wrapper">
+  {#if groups}
+    {#each Object.entries(groups).reverse() as group, i}
+      <div class="wordlist" in:fly={{ y: -20, duration: 500, delay: i * 50 }}>
+        <WordList title={`${group[0]} Letter Words (${group[1].length})`} words={group[1]} />
+      </div>
+    {/each}
+  {/if}
+</div>
