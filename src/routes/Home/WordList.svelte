@@ -7,6 +7,7 @@
 
 <style>
   .title {
+    color: var(--text-dark);
     background-color: var(--brand-accent);
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
@@ -15,8 +16,9 @@
 
   .word {
     margin: 0 1rem;
-    font-family: monospace, monospace;
+    font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
     font-size: 1.25rem;
+    color: var(--brand-dark);
   }
 
   button {

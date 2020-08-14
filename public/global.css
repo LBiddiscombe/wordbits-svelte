@@ -3,7 +3,7 @@
   --text-light: #ffffffff;
   --brand-dark: #14213dff;
   --brand-light: #e5e5e5ff;
-  --brand-accent: #ffc600ff;
+  --brand-accent: #e3b449ff;
   --text-error: #e63946ff;
   --aside-width: 100%;
   --header-height: 5rem;
@@ -22,8 +22,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto,
+    segoe ui, arial, sans-serif;
 }
 
 a {

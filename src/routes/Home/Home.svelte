@@ -15,6 +15,7 @@
 
   function onSubmit() {
     results = $data.results
+    if (value === '') results = null
   }
 </script>
 

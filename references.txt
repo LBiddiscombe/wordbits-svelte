@@ -11,3 +11,9 @@ https://designshack.net/articles/css/inner-shadows-in-css-images-text-and-beyond
     background-clip: text;
 
   */
+
+  https://bitsofco.de/the-new-system-font-stack/
+
+  https://color.adobe.com/create/color-wheel
+
+  

@@ -95,10 +95,7 @@
 
 <header>
   <a href="/#">
-    <span>
-      <strong>Word</strong>
-      bits
-    </span>
+    <span>Wordbits</span>
   </a>
   <nav>
     <a href="/#">Home</a>
