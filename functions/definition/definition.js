@@ -3,7 +3,7 @@ exports.handler = async function (event, context) {
   try {
     const word = Object.keys(event.queryStringParameters)[0] || ''
     const response = await fetch(`https://owlbot.info/api/v4/dictionary/${word}`, {
-      headers: { Authorization: 'Token 6dfd4ac8127d6271d92d849840c3a8e2e05bec30' },
+      headers: { Authorization: 'Token ' + process.env.OWLBOT_TOKEN },
     })
     if (!response.ok) {
       // NOT res.status >= 200 && res.status < 300
