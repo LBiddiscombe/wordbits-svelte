@@ -13,3 +13,7 @@ export function groupBy(array, key) {
     return item
   }, {})
 }
+
+export function groupMapByLen(array) {
+  return array.reduce((entryMap, e) => entryMap.set(e.length, [...(entryMap.get(e.length) || []), e]), new Map())
+}

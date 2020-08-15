@@ -3,12 +3,17 @@
   import WordList from './WordList.svelte'
   import { groupBy } from '../../utils'
 
-  export let results = {}
+  export let data = {}
 
+  const { error, results, resultText } = data
   let groups = groupBy(results, 'length')
 </script>
 
 <style>
+  p {
+    margin-top: 0;
+  }
+
   .wrapper {
     width: calc(100% - 2rem);
     display: grid;
@@ -28,6 +33,7 @@
   }
 </style>
 
+<p>{resultText}</p>
 <div class="wrapper">
   {#if groups}
     {#each Object.entries(groups).reverse() as group, i}

@@ -2,20 +2,20 @@
   import { fade } from 'svelte/transition'
   import Input from './Input.svelte'
   import Results from './Results.svelte'
-  import { data } from '../../stores/home'
+  import { searchDictionary } from '../../api'
 
-  let results = null
+  const emptyData = { error: '', results: [], resultText: '' }
+  let data
 
   let value = ''
 
   function onReset() {
-    results = null
+    data = null
     value = ''
   }
 
   function onSubmit() {
-    results = $data.results
-    if (value === '') results = null
+    data = searchDictionary(value)
   }
 </script>
 
@@ -30,34 +30,19 @@
     border-radius: 0.5rem;
     align-items: center;
   }
-
-  .hint {
-    font-size: 1.25rem;
-    text-align: center;
-    letter-spacing: 0.05rem;
-    color: var(--primary-light);
-    margin: 0 0.5rem;
-    margin-bottom: 0.5rem;
-  }
 </style>
 
 <div in:fade={{ duration: 500 }} class="page">
 
   <Input bind:value on:submit={onSubmit} on:click={onReset} />
-  {#if results}
-    <Results {results} />
-  {:else}
-    <p class="hint">
-      Hint: Try
-      <b>listen</b>
-      ,
-      <b>listen*</b>
-      ,
-      <b>listen/</b>
-      ,
-      <b>ha.e</b>
-      or
-      <b>3</b>
-    </p>
-  {/if}
+  {#await data}
+    <p>Searching...</p>
+  {:then data}
+    {#if data}
+      <Results {data} />
+    {/if}
+  {:catch error}
+    <p>Error, try again</p>
+  {/await}
+
 </div>
