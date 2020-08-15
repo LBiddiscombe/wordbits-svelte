@@ -2,7 +2,7 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c && netlify-lambda build src/functions",
+    "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --single --host",
     "validate": "svelte-check"
@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "netlify-lambda": "^2.0.1",
     "sirv-cli": "^1.0.0",
     "svelte-awesome": "^2.3.0",
     "svelte-spa-router": "^2.2.0"
