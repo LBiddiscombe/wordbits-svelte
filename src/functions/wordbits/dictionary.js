@@ -12,7 +12,7 @@ words.forEach((word, index) => {
   dictionary.add(word)
 })
 
-const validateSearchString = searchString => {
+const validateSearchString = (searchString) => {
   const wildcardCount = (searchString.match(/\./g) || []).length
   if (wildcardCount > MAX_WILDCARDS) {
     return `Max ${MAX_WILDCARDS} wildcards allowed`
@@ -30,7 +30,7 @@ const validateSearchString = searchString => {
   return ''
 }
 
-const searchDictionary = searchString => {
+const searchDictionary = (searchString) => {
   let error = ''
   let results = []
   let resultText = ''
@@ -56,7 +56,7 @@ const searchDictionary = searchString => {
   if (!error && dictionary && searchString.length > 0) {
     const start = performance.now()
     if (searchLength) {
-      results = words.filter(word => word.length === searchLength)
+      results = words.filter((word) => word.length === searchLength)
     } else if (asWordStart) {
       results = getWordsBeginning(searchString, WILDCARD_CHAR)
     } else if (wildcardFound) {
@@ -68,19 +68,16 @@ const searchDictionary = searchString => {
   }
 
   if (results.length > 0)
-    resultText = `Found  ${results.length} results in ${duration}ms ${
-      useAllLetters ? ' using all letters' : ''
-    }`
+    resultText = `Found  ${results.length} results in ${duration}ms ${useAllLetters ? ' using all letters' : ''}`
   if (results.length === 0 && !error) resultText = 'No words found'
 
   return { error, results, resultText }
 }
 
-const expandSearchString = searchString => {
+const expandSearchString = (searchString) => {
   let expandedSearchString = ''
   for (const char of searchString) {
-    if (/^[1-9]*$/.test(char))
-      expandedSearchString = expandedSearchString + WILDCARD_CHAR.repeat(parseInt(char))
+    if (/^[1-9]*$/.test(char)) expandedSearchString = expandedSearchString + WILDCARD_CHAR.repeat(parseInt(char))
     else expandedSearchString = expandedSearchString + char
   }
   return expandedSearchString
@@ -145,7 +142,7 @@ const getWordMatches = (letters, wildcard, fullWordsOnly = true) => {
       const remaining = chars.slice(i + 1).join('')
       if (char === wildcard) {
         const choices = [...node.keys.keys()]
-        choices.forEach(choice => {
+        choices.forEach((choice) => {
           if (node.keys.get(choice)) {
             readLetters(remaining, node.keys.get(choice), prefix + choice)
           }
@@ -169,7 +166,7 @@ const getWordsBeginning = (prefix, wildcard) => {
   const wordStart = prefix.slice(0, -1)
   let words = []
   const prefixWords = getWordMatches(wordStart, wildcard, false)
-  prefixWords.forEach(word => {
+  prefixWords.forEach((word) => {
     const node = dictionary.getPrefixNode(word)
     words = words.concat(dictionary.list(node, word))
   })
@@ -179,4 +176,4 @@ const getWordsBeginning = (prefix, wildcard) => {
 
 const byLength = (a, b) => b.length - a.length || a.localeCompare(b)
 
-export { loadDictionary, validateSearchString, searchDictionary }
+export { validateSearchString, searchDictionary }

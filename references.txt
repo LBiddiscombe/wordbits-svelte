@@ -17,3 +17,8 @@ https://designshack.net/articles/css/inner-shadows-in-css-images-text-and-beyond
   https://color.adobe.com/create/color-wheel
 
   
+  Use this to build the functions
+  C:\devlocal\wordbits-svelte\node_modules\.bin\netlify-lambda build src/functions
+
+example local test of functions
+netlify functions:invoke wordbits --querystring "listen"
