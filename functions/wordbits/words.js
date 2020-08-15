@@ -58110,7 +58110,7 @@ const words = [
   'ZOOPLANKTON',
   'ZOOS',
   'ZULU',
-  'ZULUS'
+  'ZULUS',
 ]
 
-export default words
+module.exports = words

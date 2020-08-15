@@ -1,6 +1,6 @@
-import Trie from './Trie'
-import words from './words'
-import { performance } from 'perf_hooks'
+const Trie = require('./Trie')
+const words = require('./words')
+const { performance } = require('perf_hooks')
 
 const WILDCARD_CHAR = '.'
 const USE_ALL_CHAR = '/'
@@ -176,4 +176,4 @@ const getWordsBeginning = (prefix, wildcard) => {
 
 const byLength = (a, b) => b.length - a.length || a.localeCompare(b)
 
-export { validateSearchString, searchDictionary }
+module.exports = searchDictionary

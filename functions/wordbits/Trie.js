@@ -1,19 +1,19 @@
 // Based on https://codepen.io/beaucarnes/pen/mmBNBd?editors=0011
-const Node = function() {
+const Node = function () {
   this.keys = new Map()
   this.end = false
-  this.setEnd = function() {
+  this.setEnd = function () {
     this.end = true
   }
-  this.isEnd = function() {
+  this.isEnd = function () {
     return this.end
   }
 }
 
-const Trie = function() {
+const Trie = function () {
   this.root = new Node()
 
-  this.add = function(input, node = this.root) {
+  this.add = function (input, node = this.root) {
     if (input.length === 0) {
       node.setEnd()
       return
@@ -25,7 +25,7 @@ const Trie = function() {
     }
   }
 
-  this.isWord = function(word) {
+  this.isWord = function (word) {
     word = word.toUpperCase()
     let node = this.root
     while (word.length > 1) {
@@ -39,7 +39,7 @@ const Trie = function() {
     return node.keys.has(word) && node.keys.get(word).isEnd() ? true : false
   }
 
-  this.getPrefixNode = function(prefix) {
+  this.getPrefixNode = function (prefix) {
     prefix = prefix.toUpperCase()
     let node = this.root
     while (prefix.length > 0) {
@@ -53,9 +53,9 @@ const Trie = function() {
     return node
   }
 
-  this.list = function(node = this.root, prefix = '') {
+  this.list = function (node = this.root, prefix = '') {
     let words = []
-    let search = function(node, string) {
+    let search = function (node, string) {
       if (node.keys.size !== 0) {
         for (let letter of node.keys.keys()) {
           search(node.keys.get(letter), string.concat(letter))
@@ -72,4 +72,4 @@ const Trie = function() {
   }
 }
 
-export default Trie
+module.exports = Trie
