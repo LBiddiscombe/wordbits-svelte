@@ -17,7 +17,7 @@
     transition: all 0.2s;
     color: var(--primary-dark);
     background-color: var(--primary-light);
-    border-top: 1px solid var(--overlay);
+    border-top: 1px solid var(--separator);
     z-index: 99;
   }
 
@@ -32,7 +32,7 @@
     text-decoration: none;
     padding: 1rem;
     padding-right: 0;
-    border-bottom: 1px solid var(--overlay-light);
+    border-bottom: 1px solid var(--separator-light);
   }
 
   .item:hover {

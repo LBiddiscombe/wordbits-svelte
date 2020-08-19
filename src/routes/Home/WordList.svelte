@@ -10,7 +10,6 @@
     color: var(--primary-dark);
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
-    border-bottom: 1px solid var(--overlay-light);
     font-weight: 900;
   }
 
@@ -23,6 +22,7 @@
 
   button {
     border: none;
+    color: var(--primary-dark);
     background-color: transparent;
     text-decoration: underline;
   }

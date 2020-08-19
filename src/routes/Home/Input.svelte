@@ -16,7 +16,7 @@
   }
 
   input {
-    border: 1px solid var(--overlay);
+    border: 1px solid var(--separator-light);
     height: 2.5rem;
     letter-spacing: 0.1rem;
     border-radius: 0;
@@ -25,6 +25,7 @@
     background-color: var(--primary-light);
     flex: 1;
     font-size: 1.25rem;
+    -webkit-appearance: none;
   }
 
   .submit {
@@ -35,7 +36,7 @@
     height: 2.5rem;
     border: 0;
     padding: 0px;
-    color: var(--overlay);
+    color: var(--separator);
     font-size: 1.25rem;
   }
 
@@ -51,7 +52,7 @@
 </style>
 
 <form on:submit|preventDefault autoComplete="off">
-  <input bind:this={input} bind:value maxLength="20" autoComplete="off" />
+  <input bind:this={input} bind:value maxLength="15" autoComplete="off" />
   {#if value}
     <button type="reset" class="reset" on:click|preventDefault>
       <Icon data={faTimes} scale="1.5" class="icon" />

@@ -29,6 +29,10 @@
     font-weight: bold;
   }
 
+  .definition {
+    padding-left: 1rem;
+  }
+
   .example {
     font-style: italic;
   }
@@ -43,9 +47,16 @@
     {#each data.definitions as definition}
       <div class="list">
         <div class="type">{definition.type}</div>
-        <div class="definition">{definition.definition}</div>
+        <div class="definition">
+          -
+          {@html definition.definition}
+        </div>
         {#if definition.example}
-          <div class="example">"{definition.example}"</div>
+          <div class="example">
+            "
+            {@html definition.example}
+            "
+          </div>
         {/if}
       </div>
     {/each}

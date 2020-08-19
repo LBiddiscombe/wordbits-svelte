@@ -1,13 +1,13 @@
 :root {
-  --primary-dark: #2e2e2eff;
+  --primary-dark: #3e3e3eff;
   --primary-mid: #f7fafcff;
   --primary-light: #ffffffff;
   --brand-dark: #14213dff;
   --brand-light: #f7fafcff;
   --brand-accent: #e3b449ff;
   --text-error: #e63946ff;
-  --overlay: rgba(0, 0, 0, 0.25);
-  --overlay-light: rgba(0, 0, 0, 0.1);
+  --separator: rgba(0, 0, 0, 0.25);
+  --separator-light: rgba(0, 0, 0, 0.1);
   --aside-width: 100%;
   --header-height: 5rem;
 
@@ -19,8 +19,8 @@
   --brand-dark: #f7fafcff;
   --brand-accent: #e3b449ff;
   --text-error: #e63946ff;
-  --overlay: rgba(255, 255, 255, 0.25);
-  --overlay-light: rgba(255, 255, 155, 0.1);
+  --separator: rgba(255, 255, 255, 0.25);
+  --separator-light: rgba(255, 255, 155, 0.1);
   */
 }
 
@@ -92,4 +92,8 @@ button:not(:disabled):active {
 
 button:focus {
   border-color: #666;
+}
+
+input:focus {
+  outline: 0.25rem var(--brand-accent) solid;
 }
