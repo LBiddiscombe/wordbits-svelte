@@ -6,7 +6,7 @@
     border: 1px solid #ccc;
     overflow: hidden;
     display: flex;
-    background-color: var(--text-light);
+    background-color: var(--primary-light);
     align-items: center;
   }
 

@@ -15,6 +15,23 @@
   h1 {
     font-size: 1.25rem;
   }
+
+  .list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .type {
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  .example {
+    font-style: italic;
+  }
 </style>
 
 <div in:fade={{ duration: 500 }} class="page">
@@ -24,11 +41,11 @@
     <p>Loading...</p>
   {:then data}
     {#each data.definitions as definition}
-      <div>
-        <div>{definition.type}</div>
-        <div>{definition.definition}</div>
+      <div class="list">
+        <div class="type">{definition.type}</div>
+        <div class="definition">{definition.definition}</div>
         {#if definition.example}
-          <div>"{definition.example}"</div>
+          <div class="example">"{definition.example}"</div>
         {/if}
       </div>
     {/each}

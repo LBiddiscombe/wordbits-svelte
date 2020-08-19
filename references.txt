@@ -1,3 +1,11 @@
+
+
+
+
+*********** start with this command *********
+netlify dev
+*********************************************
+
 Scratchpad for keeping useful references used and can link to the about page later...
 
 https://designshack.net/articles/css/inner-shadows-in-css-images-text-and-beyond/

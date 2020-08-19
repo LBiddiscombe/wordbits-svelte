@@ -1,12 +1,27 @@
 :root {
-  --text-dark: #2e2e2eff;
-  --text-light: #ffffffff;
+  --primary-dark: #2e2e2eff;
+  --primary-mid: #f7fafcff;
+  --primary-light: #ffffffff;
   --brand-dark: #14213dff;
-  --brand-light: #e5e5e5ff;
+  --brand-light: #f7fafcff;
   --brand-accent: #e3b449ff;
   --text-error: #e63946ff;
+  --overlay: rgba(0, 0, 0, 0.25);
+  --overlay-light: rgba(0, 0, 0, 0.1);
   --aside-width: 100%;
   --header-height: 5rem;
+
+  /*
+  --primary-light: #2e2e2eff;
+  --primary-mid: #373a3cff;
+  --primary-dark: #ffffffff;
+  --brand-light: #14213dff;
+  --brand-dark: #f7fafcff;
+  --brand-accent: #e3b449ff;
+  --text-error: #e63946ff;
+  --overlay: rgba(255, 255, 255, 0.25);
+  --overlay-light: rgba(255, 255, 155, 0.1);
+  */
 }
 
 html,
@@ -18,7 +33,7 @@ body {
 
 body {
   color: #333;
-  background-color: var(--brand-light);
+  background-color: var(--primary-mid);
   margin: 0;
   padding: 0;
   box-sizing: border-box;

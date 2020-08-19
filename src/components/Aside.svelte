@@ -15,8 +15,9 @@
     flex-direction: column;
     transform: translateX(calc(var(--aside-width) * -1.1));
     transition: all 0.2s;
-    background-color: var(--brand-light);
-    border-top: 0.5rem solid var(--brand-accent);
+    color: var(--primary-dark);
+    background-color: var(--primary-light);
+    border-top: 1px solid var(--overlay);
     z-index: 99;
   }
 
@@ -31,7 +32,7 @@
     text-decoration: none;
     padding: 1rem;
     padding-right: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid var(--overlay-light);
   }
 
   .item:hover {

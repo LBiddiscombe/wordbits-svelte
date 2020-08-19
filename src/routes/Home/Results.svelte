@@ -26,10 +26,10 @@
     flex-direction: column;
     width: 100%;
     text-align: center;
-    border: 1px solid var(--brand-accent);
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    background-color: var(--primary-light);
+    border: 1px solid var(--overlay-light);
     border-radius: 0.25rem;
-    padding-bottom: rem;
+    padding-bottom: 1rem;
   }
 </style>
 

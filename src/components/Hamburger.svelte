@@ -13,13 +13,12 @@
     width: 2rem;
     z-index: 99;
     height: 2.5rem;
-    background-color: var(--primary-dark);
   }
 
   .nav-icon:after,
   .nav-icon:before,
   .nav-icon div {
-    background-color: #fff;
+    background-color: var(--brand-dark);
     border-radius: 3px;
     content: '';
     display: block;
