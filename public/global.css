@@ -1,6 +1,6 @@
 :root {
   --primary-dark: #3e3e3eff;
-  --primary-mid: #f7fafcff;
+  --primary-mid: #f3f3f3ff;
   --primary-light: #ffffffff;
   --brand-dark: #14213dff;
   --brand-light: #f7fafcff;
@@ -10,8 +10,9 @@
   --separator-light: rgba(0, 0, 0, 0.1);
   --aside-width: 100%;
   --header-height: 5rem;
+}
 
-  /*
+[data-theme='dark'] {
   --primary-light: #2e2e2eff;
   --primary-mid: #373a3cff;
   --primary-dark: #ffffffff;
@@ -21,7 +22,6 @@
   --text-error: #e63946ff;
   --separator: rgba(255, 255, 255, 0.25);
   --separator-light: rgba(255, 255, 155, 0.1);
-  */
 }
 
 html,
@@ -33,7 +33,7 @@ body {
 
 body {
   color: #333;
-  background-color: var(--primary-mid);
+  background-color: var(--primary-light);
   margin: 0;
   padding: 0;
   box-sizing: border-box;

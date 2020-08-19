@@ -1,8 +1,14 @@
 <script lang="ts">
   import Icon from 'svelte-awesome'
-  import { faHome, faTrophy } from '@fortawesome/free-solid-svg-icons'
+  import { faHome, faTrophy, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons'
 
   export let open: boolean = false
+
+  function toggleTheme() {
+    const theme = document.body.getAttribute('data-theme')
+    if (theme === 'dark') document.body.removeAttribute('data-theme')
+    else document.body.setAttribute('data-theme', 'dark')
+  }
 </script>
 
 <style>
@@ -46,6 +52,26 @@
     justify-self: left;
     font-size: 1.25rem;
   }
+
+  button {
+    display: flex;
+    align-items: center;
+    color: var(--brand-dark);
+    text-decoration: none;
+    padding: 1rem;
+    padding-right: 0;
+    border: 0;
+    background-color: transparent;
+    color: var(--primary-dark);
+    padding: 8;
+    border-bottom: 1px solid var(--separator-light);
+  }
+
+  button span {
+    padding-left: 1rem;
+    justify-self: left;
+    font-size: 1.25rem;
+  }
 </style>
 
 <aside class:open>
@@ -57,4 +83,8 @@
     <Icon data={faTrophy} scale="2" class="icon" />
     <span>Game</span>
   </a>
+  <button on:click={toggleTheme}>
+    <Icon data={faToggleOn} scale="2" class="icon" />
+    <span>Toggle Theme</span>
+  </button>
 </aside>

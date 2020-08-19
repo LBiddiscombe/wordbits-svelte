@@ -47,6 +47,7 @@
     padding: 0;
     display: inline-block;
     background: none;
+    color: var(--primary-dark);
     border: none;
   }
 </style>

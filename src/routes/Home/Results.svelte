@@ -26,8 +26,7 @@
     flex-direction: column;
     width: 100%;
     text-align: center;
-    background-color: var(--primary-light);
-    border: 1px solid var(--separator-light);
+    background-color: var(--primary-mid);
     border-radius: 0.5rem;
     padding-bottom: 1rem;
   }
