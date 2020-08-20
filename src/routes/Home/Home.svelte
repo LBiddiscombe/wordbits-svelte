@@ -12,6 +12,7 @@
   function onReset() {
     data = null
     value = ''
+    window.pageYOffset = 0
   }
 
   function onSubmit() {
