@@ -16,7 +16,7 @@
   }
 
   input {
-    border: 1px solid var(--separator-light);
+    border: 1px solid var(--separator);
     height: 2.5rem;
     letter-spacing: 0.1rem;
     border-radius: 0;

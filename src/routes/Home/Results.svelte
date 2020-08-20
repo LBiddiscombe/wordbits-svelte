@@ -7,7 +7,7 @@
 
   const { error, results, resultText } = data
   let groups = groupBy(results, 'length')
-  let groupColor = generateHslaColors(70, 80, 0.5, Object.keys(groups).length)
+  let groupColor = generateHslaColors(70, 80, 0.25, Object.keys(groups).length)
 </script>
 
 <style>

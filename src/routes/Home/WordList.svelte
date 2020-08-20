@@ -8,6 +8,9 @@
 <style>
   .title {
     color: var(--primary-dark);
+    background-color: var(--bg-color);
+    background-blend-mode: multiply;
+    border-radius: 0.5rem 0.5rem 0 0;
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
     font-weight: 900;
