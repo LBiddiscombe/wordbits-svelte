@@ -25,6 +25,7 @@
     color: var(--primary-dark);
     background-color: transparent;
     text-decoration: underline;
+    margin-bottom: 0;
   }
 </style>
 
