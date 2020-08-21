@@ -14,7 +14,7 @@ async function getDefinition(word) {
   const response = await fetch(`/.netlify/functions/definition?${word}`)
   if (response.status !== 200) {
     console.error(`Lookup Failed: ${response.status.toString()} - ${response.statusText}`)
-    return {
+    throw {
       error: 'Lookup failed, try another word.',
     }
   }
