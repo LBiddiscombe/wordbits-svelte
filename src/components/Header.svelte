@@ -37,16 +37,14 @@
     }
   }
 
-  span {
-    display: flex;
-    align-items: center;
-    font-size: 2.5rem;
+  .title {
+    margin: 0;
   }
 </style>
 
 <header>
   <a href="/#">
-    <span>Wordbits</span>
+    <h1 class="title">Wordbits</h1>
   </a>
   <nav>
     <a href="/#">Home</a>

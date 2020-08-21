@@ -13,7 +13,7 @@
     border-radius: 0.5rem 0.5rem 0 0;
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
-    font-weight: 900;
+    font-weight: 600;
   }
 
   .word {

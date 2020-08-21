@@ -30,7 +30,7 @@
 
   a {
     color: var(--primary-dark);
-    background-color: var(--brand-light);
+    background-color: var(--separator-light);
     border-radius: 0.5rem;
     padding: 0.5rem 0;
     margin-bottom: 1rem;
@@ -45,7 +45,7 @@
   }
 
   .badge {
-    background-color: var(--primary-dark);
+    background-color: var(--separator);
     color: var(--primary-light);
     border-radius: 100%;
     display: grid;
