@@ -6,6 +6,7 @@
   import Results from './Results.svelte'
   import { searchDictionary } from '../../api'
 
+  export let params = {}
   let data
   let value
 
