@@ -1,23 +1,14 @@
 <script>
   import { fade } from 'svelte/transition'
-  import Input from './Input.svelte'
-  import Results from './Results.svelte'
-  import { searchDictionary } from '../../api'
 
-  const emptyData = { error: '', results: [], resultText: '' }
-  let data
-
-  let value = ''
-
-  function onReset() {
-    data = null
-    value = ''
-    window.pageYOffset = 0
-  }
-
-  function onSubmit() {
-    data = searchDictionary(value)
-  }
+  let examples = [
+    { link: 'listen', description: 'Anagrams using any of the letters', letters: 'listen', count: 53 },
+    { link: 'listen%2F', description: 'Anagrams using all the letters', letters: 'listen/', count: 5 },
+    { link: 'ha.e', description: 'Match a single missing character', letters: 'ha.e', count: 6 },
+    { link: 'h3e', description: 'Multiple missing characters', letters: 'h3e', count: 10 },
+    { link: 'h.g2e', description: 'Match a pattern', letters: 'h.g2e', count: 1 },
+    { link: 'pref*', description: 'Words starting with', letters: 'pref*', count: 28 },
+  ]
 </script>
 
 <style>
@@ -31,19 +22,56 @@
     border-radius: 0.5rem;
     align-items: center;
   }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    color: var(--primary-dark);
+    background-color: var(--brand-light);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  a p {
+    margin: 0;
+    margin-right: 1rem;
+  }
+
+  .badge {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-weight: bold;
+    margin-left: auto;
+  }
 </style>
 
 <div in:fade={{ duration: 500 }} class="page">
 
-  <Input bind:value on:submit={onSubmit} on:click={onReset} />
-  {#await data}
-    <p>Searching...</p>
-  {:then data}
-    {#if data}
-      <Results {data} />
-    {/if}
-  {:catch error}
-    <p>Error, try again</p>
-  {/await}
+  <div class="container">
+
+    <p>Try some of these searches</p>
+
+    {#each examples as example, i}
+      <a href="#/search/{example.link}">
+        <div>
+          <b>{example.letters}</b>
+          <p>{example.description}</p>
+        </div>
+        <div class="badge">{example.count}</div>
+      </a>
+    {/each}
+  </div>
 
 </div>

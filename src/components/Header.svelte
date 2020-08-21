@@ -51,6 +51,8 @@
   <nav>
     <a href="/#">Home</a>
     |
+    <a href="#/search">Search</a>
+    |
     <a href="#/game">Game</a>
   </nav>
   <div class="menu-btn">
