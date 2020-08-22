@@ -1,7 +1,6 @@
 <script>
   import { fade } from 'svelte/transition'
   import { getDefinition } from '../api'
-  import { data } from '../stores/home'
   export let params = {}
 
   let promise = getDefinition(params.word)
