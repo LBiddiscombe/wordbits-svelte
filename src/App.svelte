@@ -9,6 +9,10 @@
   function onNavigate() {
     asideOpen = false
   }
+
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.setAttribute('data-theme', 'dark')
+  }
 </script>
 
 <style>
