@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from 'svelte-awesome'
-  import { faHome, faSearch, faTrophy, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons'
+  import { faHome, faSearch, faTrophy, faEraser, faToggleOn } from '@fortawesome/free-solid-svg-icons'
 
   export let open: boolean = false
 
@@ -87,6 +87,11 @@
     <Icon data={faTrophy} scale="2" class="icon" />
     <span>Game</span>
   </a>
+  <p />
+  <button on:click={() => sessionStorage.clear()}>
+    <Icon data={faEraser} scale="2" class="icon" />
+    <span>Clear Cache</span>
+  </button>
   <button on:click={toggleTheme}>
     <Icon data={faToggleOn} scale="2" class="icon" />
     <span>Toggle Theme</span>
