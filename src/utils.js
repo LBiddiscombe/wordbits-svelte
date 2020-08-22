@@ -15,7 +15,7 @@ export function groupBy(array, key) {
 }
 
 export function groupMapByLen(array) {
-  return array.reduce((entryMap, e) => entryMap.set(e.length, [...(entryMap.get(e.length) || []), e]), new Map())
+  return array.reduce((group, item) => group.set(item.length, [...(group.get(item.length) || []), item]), new Map())
 }
 
 export function generateHslaColors(saturation, lightness, alpha, amount) {

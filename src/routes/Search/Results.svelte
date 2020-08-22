@@ -1,13 +1,14 @@
 <script>
   import { fly } from 'svelte/transition'
   import WordList from './WordList.svelte'
-  import { groupBy, generateHslaColors } from '../../utils'
+  import { groupMapByLen, generateHslaColors } from '../../utils'
+  import App from '../../App.svelte'
 
   export let data = {}
 
   const { error, results, resultText } = data
-  let groups = groupBy(results, 'length')
-  let groupColor = generateHslaColors(70, 80, 0.25, Object.keys(groups).length)
+  let groups = groupMapByLen(results)
+  let groupColor = generateHslaColors(70, 80, 0.25, groups.size)
 </script>
 
 <style>
@@ -37,9 +38,9 @@
 <p>{resultText}</p>
 <div class="wrapper">
   {#if groups}
-    {#each Object.entries(groups).reverse() as group, i}
+    {#each [...groups] as [len, words], i}
       <div class="wordlist" style="--bg-color:{groupColor[i]}" in:fly={{ y: -20, duration: 500, delay: i * 50 }}>
-        <WordList title={`${group[0]} Letter Words (${group[1].length})`} words={group[1]} />
+        <WordList title={`${len} Letter Words (${words.length})`} {words} />
       </div>
     {/each}
   {/if}
