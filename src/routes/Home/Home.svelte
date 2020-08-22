@@ -32,11 +32,10 @@
     color: var(--primary-dark);
     background-color: var(--separator-light);
     border-radius: 0.5rem;
-    padding: 0.5rem 0;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
   }
 
   a p {

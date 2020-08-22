@@ -15,7 +15,7 @@
     const routeParts = (route.match(/\//g) || []).length
 
     if (letters && routeParts > 1) {
-      value = letters
+      value = letters.replace('%2F', '/')
     } else {
       value = ''
     }

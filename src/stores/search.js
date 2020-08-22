@@ -6,7 +6,7 @@ function createSearch() {
 
   return {
     subscribe,
-    execute: (query) => set(searchDictionary(query.replace('%2F', '/'))),
+    execute: (query) => set(searchDictionary(query)),
   }
 }
 
