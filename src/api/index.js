@@ -4,7 +4,7 @@ async function searchDictionary(searchString) {
     return JSON.parse(sessionStorage.getItem(cacheKey))
   }
 
-  const response = await fetch(`/.netlify/functions/wordbits?${searchString}`)
+  const response = await fetch(`/.netlify/functions/search?${searchString}`)
   if (response.status !== 200) {
     console.error(`Search Failed: ${response.status.toString()} - ${response.statusText}`)
     throw {

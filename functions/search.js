@@ -1,4 +1,4 @@
-const searchDictionary = require('./wordbits/dictionary')
+const searchDictionary = require('./search/dictionary')
 
 exports.handler = async (event) => {
   const searchString = Object.keys(event.queryStringParameters)[0] || ''

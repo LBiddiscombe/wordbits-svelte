@@ -2,7 +2,6 @@
   import { fly } from 'svelte/transition'
   import WordList from './WordList.svelte'
   import { groupMapByLen, generateHslColors } from '../../utils'
-  import App from '../../App.svelte'
 
   export let data = {}
 

@@ -6,12 +6,12 @@
   import Input from './Input.svelte'
   import Results from './Results.svelte'
 
-  export let params
+  export let params = {}
   let value
 
   // subscribing to the location store as the params object isn't updated in time when updating the search manually
   const unsubscribe = location.subscribe((route) => {
-    const letters = route.substring(route.lastIndexOf('/') + 1)
+    const letters = route.substring(route.lastIndexOf('/') + 1) || params.letters
     const routeParts = (route.match(/\//g) || []).length
 
     if (letters && routeParts > 1) {

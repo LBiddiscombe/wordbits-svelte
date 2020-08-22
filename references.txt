@@ -29,4 +29,7 @@ https://designshack.net/articles/css/inner-shadows-in-css-images-text-and-beyond
   C:\devlocal\wordbits-svelte\node_modules\.bin\netlify-lambda build src/functions
 
 example local test of functions
-netlify functions:invoke wordbits --querystring "listen"
+netlify functions:invoke search --querystring "listen"
+
+wordsearch algorithm
+https://github.com/sbj42/word-search-generator
