@@ -1,14 +1,14 @@
 <script>
   import { fly } from 'svelte/transition'
   import WordList from './WordList.svelte'
-  import { groupMapByLen, generateHslaColors } from '../../utils'
+  import { groupMapByLen, generateHslColors } from '../../utils'
   import App from '../../App.svelte'
 
   export let data = {}
 
   const { error, results, resultText } = data
   let groups = groupMapByLen(results)
-  let groupColor = generateHslaColors(70, 80, 0.25, groups.size)
+  let groupColor = generateHslColors(70, 80, groups.size)
 </script>
 
 <style>
@@ -19,17 +19,16 @@
   .wrapper {
     width: calc(100% - 2rem);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(32ch, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(32ch, 50ch));
+    justify-content: center;
     grid-gap: 1rem;
   }
 
   .wordlist {
-    --bg-color: var(--primary-mid);
     display: flex;
     flex-direction: column;
-    width: 100%;
     text-align: center;
-    background-color: var(--bg-color);
+    background-color: hsl(var(--bg-color), 0.25);
     border-radius: 0.5rem;
     padding-bottom: 1rem;
   }
