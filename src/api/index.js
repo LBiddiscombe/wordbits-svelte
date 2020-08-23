@@ -35,4 +35,16 @@ async function getDefinition(word) {
   return data
 }
 
-export { searchDictionary, getDefinition }
+async function createGame() {
+  const response = await fetch(`/.netlify/functions/createGame`)
+  if (response.status !== 200) {
+    console.error(`Game creation failed: ${response.status.toString()} - ${response.statusText}`)
+    throw {
+      error: 'Game creation failed, try again',
+    }
+  }
+  const data = await response.json()
+  return data
+}
+
+export { searchDictionary, getDefinition, createGame }

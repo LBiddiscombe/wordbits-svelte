@@ -29,7 +29,8 @@ https://designshack.net/articles/css/inner-shadows-in-css-images-text-and-beyond
   C:\devlocal\wordbits-svelte\node_modules\.bin\netlify-lambda build src/functions
 
 example local test of functions
-netlify functions:invoke search --querystring "listen"
+netlify functions:invoke search --querystring "listen" --no-identity
+netlify functions:invoke createGame --no-identity
 
 wordsearch algorithm
 https://github.com/sbj42/word-search-generator

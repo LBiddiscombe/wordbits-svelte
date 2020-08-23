@@ -1,5 +1,9 @@
 <script>
   import { fade } from 'svelte/transition'
+  import Board from './Board.svelte'
+  import { createGame } from '../../api'
+
+  let promise = createGame()
 </script>
 
 <style>
@@ -11,13 +15,14 @@
     align-items: center;
     border-radius: 0.5rem;
   }
-
-  h1 {
-    display: flex;
-    align-items: center;
-  }
 </style>
 
 <div in:fade={{ duration: 500 }} class="page">
-  <h1>Game</h1>
+
+  {#await promise}
+    <p>Initialising...</p>
+  {:then data}
+    <Board {data} />
+  {/await}
+
 </div>
