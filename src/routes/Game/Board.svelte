@@ -11,7 +11,6 @@
   let highlights = []
 
   function solveWord(word) {
-    console.log(word)
     const value = wordMap.get(word)
     value.solved = true
     wordMap.set(word, value)
@@ -24,6 +23,7 @@
         y1: cells[i1].offsetTop + 16,
         x2: cells[i2].offsetLeft + 16,
         y2: cells[i2].offsetTop + 16,
+        color: wordColor[data.words.indexOf(word)],
       },
     ]
   }
@@ -34,7 +34,7 @@
     position: relative;
     margin: 0 auto;
     display: grid;
-    width: calc(100% - 3rem);
+    width: calc((2rem + 0.25rem) * 10);
     grid-template-columns: repeat(10, 2rem);
     grid-template-rows: repeat(10, 2rem);
     gap: 0.25rem;
@@ -63,10 +63,22 @@
     width: calc(100% + 1rem);
     height: 100%;
     position: absolute;
+  }
+
+  svg path {
     stroke: hsl(var(--stroke));
     stroke-opacity: 0.75;
     stroke-width: 24;
     stroke-linecap: round;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: dash 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   button {
@@ -92,8 +104,8 @@
   {/each}
 
   {#each highlights as line, i}
-    <svg style="--stroke:{wordColor[i]}">
-      <line x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} />
+    <svg style="--stroke:{line.color}">
+      <path d="M{line.x1} {line.y1}l{line.x2 - line.x1} {line.y2 - line.y1}" />
     </svg>
   {/each}
 
