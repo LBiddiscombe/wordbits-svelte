@@ -1,9 +1,10 @@
 class WordSearch {
-  constructor(width, height, grid, words) {
+  constructor(width, height, grid, words, wordMap) {
     this.width = width
     this.height = height
     this.grid = grid
     this.words = words
+    this.wordMap = wordMap
   }
 
   get(x, y) {
@@ -26,7 +27,7 @@ function generate(options) {
   const defaults = {
     words: [],
     diagonals: true,
-    minLength: 3,
+    minLength: 5,
     maxLength: null,
     width: 10,
     height: 10,
@@ -34,8 +35,6 @@ function generate(options) {
     effort: 10000,
   }
   options = Object.assign({}, defaults, options)
-
-  console.log(options)
 
   let words = options.words
     .slice()
@@ -88,14 +87,25 @@ function generate(options) {
   }
 
   function putWord(x, y, dx, dy, word) {
+    const start = { x1: x, y1: y }
     for (let i = 0; i < word.length; i++) {
       const l = word[i].toUpperCase()
       set(x, y, l)
       x += dx
       y += dy
     }
+
     used.push(word)
-    usedMap.set(word, true)
+    usedMap.set(word, {
+      ...start,
+      x2: x - dx,
+      y2: y - dy,
+      dx,
+      dy,
+      i1: start.y1 * width + start.x1,
+      i2: (y - dy) * width + (x - dx),
+      solved: false,
+    })
   }
 
   for (let i = 0; i < width * height * options.effort; i++) {
@@ -118,7 +128,7 @@ function generate(options) {
 
   used.sort()
 
-  return new WordSearch(width, height, grid, used)
+  return new WordSearch(width, height, grid, used, [...usedMap])
 }
 
 exports.generate = generate
