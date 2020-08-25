@@ -1,5 +1,6 @@
 <script>
   import { scale } from 'svelte/transition'
+  import { draw } from './draw'
   import { generateHslColors } from '../../utils'
   import { faInfo } from '@fortawesome/free-solid-svg-icons'
 
@@ -70,15 +71,6 @@
     stroke-opacity: 0.75;
     stroke-width: 24;
     stroke-linecap: round;
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
-    animation: dash 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 0;
-    }
   }
 
   button {
@@ -105,7 +97,7 @@
 
   {#each highlights as line, i}
     <svg style="--stroke:{line.color}">
-      <path d="M{line.x1} {line.y1}l{line.x2 - line.x1} {line.y2 - line.y1}" />
+      <path in:draw d="M{line.x1} {line.y1}l{line.x2 - line.x1} {line.y2 - line.y1}" />
     </svg>
   {/each}
 
