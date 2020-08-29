@@ -8,9 +8,9 @@
 
 */
 
-import { quintIn } from 'svelte/easing'
+import { quintOut } from 'svelte/easing'
 
-export function draw(node, { delay = 0, speed, duration, easing = quintIn }) {
+export function draw(node, { delay = 0, speed, duration, easing = quintOut }) {
   // check for a linecap - if used add this to the dasharray length property
   const hasEndCaps = getComputedStyle(node).strokeLinecap !== 'butt'
   let capSize = hasEndCaps ? parseInt(getComputedStyle(node).strokeWidth) : 0

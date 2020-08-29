@@ -9,7 +9,46 @@
   let cells = [...Array(100)]
   let wordColor = generateHslColors(70, 80, data.words.length)
   let wordMap = new Map(data.wordMap)
-  let highlights = []
+  let solved = []
+  let highlight = {}
+  let start = {}
+  const CELL_OFFSET = 18
+
+  function handleStart(e) {
+    const i1 = Number(e.target.dataset.id)
+    const x1 = cells[i1].offsetLeft + CELL_OFFSET
+    const y1 = cells[i1].offsetTop + CELL_OFFSET
+    highlight = { i1, x1, y1 }
+  }
+
+  function handleMove(e) {
+    const el = document.elementFromPoint(e.clientX, e.clientY)
+    const { i1, x1, y1 } = highlight
+    const i2 = Number(el.dataset.id)
+    if (!i2) return
+
+    const x2 = cells[i2].offsetLeft + CELL_OFFSET
+    const y2 = cells[i2].offsetTop + CELL_OFFSET
+    if (x1 === x2 || y1 === y2 || Math.abs(x1 - x2) === Math.abs(y1 - y2)) {
+      highlight = { ...highlight, i2, x2, y2 }
+    } else {
+      highlight = { i1, x1, y1 }
+    }
+  }
+
+  function handleEnd(e) {
+    let wordFound = null
+    for (let [key, value] of wordMap) {
+      if (value.i1 === highlight.i1 && value.i2 === highlight.i2) {
+        wordFound = key
+        break
+      }
+    }
+
+    highlight = {}
+
+    if (wordFound) solveWord(wordFound)
+  }
 
   function solveWord(word) {
     const value = wordMap.get(word)
@@ -17,13 +56,13 @@
     wordMap.set(word, value)
     wordMap = wordMap // better way to trigger rectivity on a Map??
     const { i1, i2 } = value
-    highlights = [
-      ...highlights,
+    solved = [
+      ...solved,
       {
-        x1: cells[i1].offsetLeft + 16,
-        y1: cells[i1].offsetTop + 16,
-        x2: cells[i2].offsetLeft + 16,
-        y2: cells[i2].offsetTop + 16,
+        x1: cells[i1].offsetLeft + CELL_OFFSET,
+        y1: cells[i1].offsetTop + CELL_OFFSET,
+        x2: cells[i2].offsetLeft + CELL_OFFSET,
+        y2: cells[i2].offsetTop + CELL_OFFSET,
         color: wordColor[data.words.indexOf(word)],
       },
     ]
@@ -36,9 +75,10 @@
     margin: 0 auto;
     display: grid;
     width: calc((2rem + 0.25rem) * 10);
-    grid-template-columns: repeat(10, 2rem);
-    grid-template-rows: repeat(10, 2rem);
-    gap: 0.25rem;
+    grid-template-columns: repeat(10, 2.25rem);
+    grid-template-rows: repeat(10, 2.25rem);
+    touch-action: none;
+    user-select: none;
   }
 
   .item {
@@ -85,17 +125,24 @@
   }
 </style>
 
-<div class="board">
+<div class="board" on:pointerdown={handleStart} on:pointermove={handleMove} on:pointerup={handleEnd}>
   {#each data.grid as item, i}
     <span
       bind:this={cells[i]}
+      data-id={i}
       in:scale={{ duration: 300, start: 1.5, delay: (Math.floor(i / 10) + (i % 10)) * 25 }}
       class="item">
       {item}
     </span>
   {/each}
 
-  {#each highlights as line, i}
+  {#if highlight.i2}
+    <svg style="--stroke: 330, 100%, 71%">
+      <path d="M{highlight.x1} {highlight.y1}l{highlight.x2 - highlight.x1} {highlight.y2 - highlight.y1}" />
+    </svg>
+  {/if}
+
+  {#each solved as line}
     <svg style="--stroke:{line.color}">
       <path in:draw d="M{line.x1} {line.y1}l{line.x2 - line.x1} {line.y2 - line.y1}" />
     </svg>
@@ -105,8 +152,6 @@
 
 <div class="tagwrapper">
   {#each data.words as word, i}
-    <button class:solved={wordMap.get(word).solved} on:click|once={solveWord(word)} class="tag">
-      {word.toLowerCase()}
-    </button>
+    <button class:solved={wordMap.get(word).solved} class="tag">{word.toLowerCase()}</button>
   {/each}
 </div>

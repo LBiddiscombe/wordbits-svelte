@@ -132,3 +132,37 @@ function generate(options) {
 }
 
 exports.generate = generate
+
+/* 
+
+TODO: Utility function to create a random letter based on usage, state below;
+
+Letter	Usage	Weighting
+e	13%	11
+t	9.10%	8
+a	8.20%	8
+o	7.50%	7
+i	7%	7
+n	6.70%	7
+h	6.10%	6
+s	6.30%	6
+r	6%	5
+d	4.30%	4
+l	4%	4
+c	2.80%	3
+m	2.40%	3
+u	2.80%	3
+f	2.20%	2
+w	2.40%	2
+b	1.50%	2
+g	2%	2
+p	1.90%	2
+y	2%	2
+j	0.15%	1
+k	0.77%	1
+q	0.10%	1
+v	0.98%	1
+x	0.15%	1
+z	0.07%	1
+
+*/
