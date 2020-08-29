@@ -31,8 +31,6 @@
     const y2 = cells[i2].offsetTop + CELL_OFFSET
     if (x1 === x2 || y1 === y2 || Math.abs(x1 - x2) === Math.abs(y1 - y2)) {
       highlight = { ...highlight, i2, x2, y2 }
-    } else {
-      highlight = { i1, x1, y1 }
     }
   }
 
