@@ -44,6 +44,8 @@ async function createGame() {
     }
   }
   const data = await response.json()
+  // rehydrate the Map object from the json array returned
+  data.wordMap = new Map(data.wordMap)
   return data
 }
 
