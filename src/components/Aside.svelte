@@ -1,14 +1,25 @@
 <script lang="ts">
   import Icon from 'svelte-awesome'
   import { faHome, faSearch, faTrophy, faEraser, faAdjust } from '@fortawesome/free-solid-svg-icons'
+  import { getLocalStorageSize } from '../utils'
 
   export let open: boolean = false
+
+  let used
+
+  $: if (open) used = getLocalStorageSize()
 
   function toggleTheme() {
     const currentTheme = JSON.parse(localStorage.getItem('theme'))
     const theme = currentTheme === 'dark' ? 'light' : 'dark'
     localStorage.setItem('theme', JSON.stringify(theme))
     document.body.setAttribute('data-theme', theme)
+  }
+
+  function clearCache() {
+    sessionStorage.clear()
+    localStorage.clear()
+    used = getLocalStorageSize()
   }
 </script>
 
@@ -89,9 +100,9 @@
     <span>Game</span>
   </a>
   <p />
-  <button on:click={() => sessionStorage.clear()}>
+  <button on:click={clearCache}>
     <Icon data={faEraser} scale="2" class="icon" />
-    <span>Clear Cache</span>
+    <span>Clear Cache ({used})</span>
   </button>
   <button on:click={toggleTheme}>
     <Icon data={faAdjust} scale="2" class="icon" />
