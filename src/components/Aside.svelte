@@ -5,9 +5,10 @@
   export let open: boolean = false
 
   function toggleTheme() {
-    const theme = document.body.getAttribute('data-theme')
-    if (theme === 'dark') document.body.removeAttribute('data-theme')
-    else document.body.setAttribute('data-theme', 'dark')
+    const currentTheme = JSON.parse(localStorage.getItem('theme'))
+    const theme = currentTheme === 'dark' ? 'light' : 'dark'
+    localStorage.setItem('theme', JSON.stringify(theme))
+    document.body.setAttribute('data-theme', theme)
   }
 </script>
 

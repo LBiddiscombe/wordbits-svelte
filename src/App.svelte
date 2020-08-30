@@ -10,8 +10,13 @@
     asideOpen = false
   }
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.body.setAttribute('data-theme', 'dark')
+  const theme = JSON.parse(localStorage.getItem('theme'))
+  if (theme) {
+    document.body.setAttribute('data-theme', theme)
+  } else {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.setAttribute('data-theme', 'dark')
+    }
   }
 </script>
 

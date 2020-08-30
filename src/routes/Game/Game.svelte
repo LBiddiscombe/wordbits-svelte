@@ -8,7 +8,7 @@
 
   let data, grid, words, wordMap
   let wordColors = []
-  let solved = []
+  let solved = JSON.parse(localStorage.getItem('solved')) || []
   let completed = false
 
   createGame().then((res) => {
@@ -30,8 +30,11 @@
     }
     if (word) solved = [...solved, { word, ...event.detail }]
 
+    localStorage.setItem('solved', JSON.stringify(solved))
+
     if (solved.length === words.length) {
       setTimeout(() => (completed = true), 1000)
+      localStorage.removeItem('game')
     }
   }
 </script>
