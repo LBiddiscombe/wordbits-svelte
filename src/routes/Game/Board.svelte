@@ -1,15 +1,16 @@
 <script>
   import { scale } from 'svelte/transition'
+  import { createEventDispatcher } from 'svelte'
   import { draw } from './draw'
 
-  export let data
-  export let wordMap
+  export let grid
+  export let words
   export let wordColors
+  export let solved = []
 
+  const dispatch = createEventDispatcher()
   let cells = [...Array(100)]
-  let solved = []
-  let highlight = {}
-  wordMap = data.wordMap
+  let selection = {}
 
   function setXY(id) {
     return {
@@ -21,52 +22,28 @@
   function handleStart(e) {
     const i1 = Number(e.target.dataset.id)
     const { x: x1, y: y1 } = setXY(i1)
-    highlight = { i1, x1, y1 }
+    selection = { i1, x1, y1 }
   }
 
   function handleMove(e) {
     const el = document.elementFromPoint(e.clientX, e.clientY)
     const i2 = Number(el.dataset.id)
-    if (!i2) return
+    if (isNaN(i2)) return
 
-    const { x1, y1 } = highlight
+    const { x1, y1 } = selection
     const { x: x2, y: y2 } = setXY(i2)
+
     // valid selection if start and end are in same row, column or on a diagonal
     if (x1 === x2 || y1 === y2 || Math.abs(x1 - x2) === Math.abs(y1 - y2)) {
-      highlight = { ...highlight, i2, x2, y2 }
+      selection = { ...selection, i2, x2, y2 }
     }
   }
 
   function handleEnd() {
-    let wordFound = null
-    for (let [key, value] of wordMap) {
-      if (value.i1 === highlight.i1 && value.i2 === highlight.i2) {
-        wordFound = key
-        break
-      }
-    }
-    if (wordFound) solveWord(wordFound)
-    highlight = {}
-  }
-
-  function solveWord(word) {
-    const value = wordMap.get(word)
-    value.solved = true
-    wordMap.set(word, value)
-    wordMap = wordMap // better way to trigger rectivity on a Map??
-    const { i1, i2 } = value
-    const { x: x1, y: y1 } = setXY(i1)
-    const { x: x2, y: y2 } = setXY(i2)
-    solved = [
-      ...solved,
-      {
-        x1,
-        y1,
-        x2,
-        y2,
-        color: wordColors[data.words.indexOf(word)],
-      },
-    ]
+    dispatch('selection', {
+      ...selection,
+    })
+    selection = {}
   }
 </script>
 
@@ -104,7 +81,7 @@
 </style>
 
 <div class="board" on:pointerdown={handleStart} on:pointermove={handleMove} on:pointerup={handleEnd}>
-  {#each data.grid as item, i}
+  {#each grid as item, i}
     <span
       bind:this={cells[i]}
       data-id={i}
@@ -114,14 +91,14 @@
     </span>
   {/each}
 
-  {#if highlight.i2}
+  {#if selection.i2 !== undefined}
     <svg style="--stroke: 330, 100%, 71%">
-      <path d="M{highlight.x1} {highlight.y1}l{highlight.x2 - highlight.x1} {highlight.y2 - highlight.y1}" />
+      <path d="M{selection.x1} {selection.y1}l{selection.x2 - selection.x1} {selection.y2 - selection.y1}" />
     </svg>
   {/if}
 
   {#each solved as line}
-    <svg style="--stroke:{line.color}">
+    <svg style="--stroke:{wordColors[words.indexOf(line.word)]}">
       <path in:draw d="M{line.x1} {line.y1}l{line.x2 - line.x1} {line.y2 - line.y1}" />
     </svg>
   {/each}

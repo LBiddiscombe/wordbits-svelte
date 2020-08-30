@@ -1,11 +1,12 @@
 <script>
-  export let wordMap
-  export let wordColors
+  export let words
+  export let wordColors = []
+  export let solved = []
 </script>
 
 <style>
   .tagwrapper {
-    width: calc(100vh - 2rem);
+    width: calc(100vw - 2rem);
     max-width: 500px;
     display: flex;
     flex-wrap: wrap;
@@ -16,20 +17,20 @@
   .tag {
     padding: 0.25rem 0.5rem;
     border-radius: 0.75rem;
-    background-color: hsl(var(--bg-color));
+    background-color: hsl(var(--bg-color), 0.5);
     margin: 0.25rem;
   }
 
   .tag.solved {
     text-decoration: line-through;
-    background-color: hsl(var(--bg-color), 0.5);
+    background-color: hsl(var(--bg-color), 0.25);
     pointer-events: none;
   }
 </style>
 
 <div class="tagwrapper">
-  {#each [...wordMap].sort() as [word], i}
-    <div style="--bg-color:{wordColors[i]}" class="tag" class:solved={wordMap.get(word).solved}>
+  {#each words as word, i}
+    <div style="--bg-color:{wordColors[i]}" class="tag" class:solved={solved.find((w) => w.word === word)}>
       {word.toLowerCase()}
     </div>
   {/each}

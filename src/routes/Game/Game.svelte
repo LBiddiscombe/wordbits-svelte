@@ -5,11 +5,29 @@
   import { generateHslColors } from '../../utils'
   import WordTags from './WordTags.svelte'
 
-  let promise = createGame()
-  let wordMap
+  let data, grid, words, wordMap
   let wordColors = []
+  let solved = []
 
-  $: wordColors = wordMap ? generateHslColors(70, 80, wordMap.size) : []
+  createGame().then((res) => {
+    data = res
+    words = res.words
+    grid = res.grid
+    wordMap = res.wordMap
+    wordColors = generateHslColors(70, 80, words.length)
+  })
+
+  function handleSelection(event) {
+    const { i1, i2 } = event.detail
+    let word = null
+    for (let [key, value] of wordMap) {
+      if (value.i1 === i1 && value.i2 === i2) {
+        word = key
+        break
+      }
+    }
+    if (word) solved = [...solved, { word, ...event.detail }]
+  }
 </script>
 
 <style>
@@ -25,13 +43,11 @@
 
 <div in:fade={{ duration: 500 }} class="page">
 
-  {#await promise}
-    <p>Initialising...</p>
-  {:then data}
-    <Board {data} bind:wordMap {wordColors} />
-    {#if wordMap}
-      <WordTags {wordMap} {wordColors} />
-    {/if}
-  {/await}
+  {#if data}
+    <Board {grid} {words} {wordColors} {solved} on:selection={handleSelection} />
+    <WordTags {words} {wordColors} {solved} />
+  {:else}
+    <p>Reading dictionary...</p>
+  {/if}
 
 </div>
