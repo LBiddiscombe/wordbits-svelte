@@ -32,9 +32,10 @@
 
     localStorage.setItem('solved', JSON.stringify(solved))
 
-    if (solved.length === words.length) {
+    if (solved.length >= words.length) {
       setTimeout(() => (completed = true), 1000)
       localStorage.removeItem('game')
+      localStorage.removeItem('solved')
     }
   }
 </script>
