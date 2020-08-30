@@ -63,6 +63,7 @@
 
   a {
     color: var(--primary-light);
+    text-decoration: underline;
   }
 </style>
 
@@ -79,7 +80,7 @@
     <div in:scale={{ duration: 1000, easing: elasticOut }} class="completed">
       <h1>Well Done!</h1>
       <p>
-        <a href="#/game" on:click={() => location.reload()}>Try again</a>
+        <a href="#/game" on:click={() => location.reload()}>Try another</a>
       </p>
     </div>
   {/if}
