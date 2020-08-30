@@ -1,40 +1,43 @@
 <script>
   import { scale } from 'svelte/transition'
   import { draw } from './draw'
-  import { generateHslColors } from '../../utils'
-  import { faInfo } from '@fortawesome/free-solid-svg-icons'
 
   export let data
+  export let wordMap
+  export let wordColors
 
   let cells = [...Array(100)]
-  let wordColor = generateHslColors(70, 80, data.words.length)
-  let wordMap = new Map(data.wordMap)
   let solved = []
   let highlight = {}
-  let start = {}
-  const CELL_OFFSET = 18
+  wordMap = data.wordMap
+
+  function setXY(id) {
+    return {
+      x: cells[id].offsetLeft + 18,
+      y: cells[id].offsetTop + 18,
+    }
+  }
 
   function handleStart(e) {
     const i1 = Number(e.target.dataset.id)
-    const x1 = cells[i1].offsetLeft + CELL_OFFSET
-    const y1 = cells[i1].offsetTop + CELL_OFFSET
+    const { x: x1, y: y1 } = setXY(i1)
     highlight = { i1, x1, y1 }
   }
 
   function handleMove(e) {
     const el = document.elementFromPoint(e.clientX, e.clientY)
-    const { i1, x1, y1 } = highlight
     const i2 = Number(el.dataset.id)
     if (!i2) return
 
-    const x2 = cells[i2].offsetLeft + CELL_OFFSET
-    const y2 = cells[i2].offsetTop + CELL_OFFSET
+    const { x1, y1 } = highlight
+    const { x: x2, y: y2 } = setXY(i2)
+    // valid selection if start and end are in same row, column or on a diagonal
     if (x1 === x2 || y1 === y2 || Math.abs(x1 - x2) === Math.abs(y1 - y2)) {
       highlight = { ...highlight, i2, x2, y2 }
     }
   }
 
-  function handleEnd(e) {
+  function handleEnd() {
     let wordFound = null
     for (let [key, value] of wordMap) {
       if (value.i1 === highlight.i1 && value.i2 === highlight.i2) {
@@ -42,10 +45,8 @@
         break
       }
     }
-
-    highlight = {}
-
     if (wordFound) solveWord(wordFound)
+    highlight = {}
   }
 
   function solveWord(word) {
@@ -54,14 +55,16 @@
     wordMap.set(word, value)
     wordMap = wordMap // better way to trigger rectivity on a Map??
     const { i1, i2 } = value
+    const { x: x1, y: y1 } = setXY(i1)
+    const { x: x2, y: y2 } = setXY(i2)
     solved = [
       ...solved,
       {
-        x1: cells[i1].offsetLeft + CELL_OFFSET,
-        y1: cells[i1].offsetTop + CELL_OFFSET,
-        x2: cells[i2].offsetLeft + CELL_OFFSET,
-        y2: cells[i2].offsetTop + CELL_OFFSET,
-        color: wordColor[data.words.indexOf(word)],
+        x1,
+        y1,
+        x2,
+        y2,
+        color: wordColors[data.words.indexOf(word)],
       },
     ]
   }
@@ -86,18 +89,6 @@
     z-index: 2;
   }
 
-  .tagwrapper {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 1rem 0;
-    justify-content: center;
-  }
-
-  .tag {
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.75rem;
-  }
-
   svg {
     width: calc(100% + 1rem);
     height: 100%;
@@ -109,17 +100,6 @@
     stroke-opacity: 0.75;
     stroke-width: 24;
     stroke-linecap: round;
-  }
-
-  button {
-    border: none;
-    margin: 0.25rem;
-  }
-
-  .solved {
-    text-decoration: line-through;
-    background-color: var(--separator);
-    pointer-events: none;
   }
 </style>
 
@@ -146,10 +126,4 @@
     </svg>
   {/each}
 
-</div>
-
-<div class="tagwrapper">
-  {#each data.words as word, i}
-    <button class:solved={wordMap.get(word).solved} class="tag">{word.toLowerCase()}</button>
-  {/each}
 </div>

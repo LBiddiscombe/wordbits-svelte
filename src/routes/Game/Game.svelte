@@ -2,8 +2,14 @@
   import { fade } from 'svelte/transition'
   import Board from './Board.svelte'
   import { createGame } from '../../api'
+  import { generateHslColors } from '../../utils'
+  import WordTags from './WordTags.svelte'
 
   let promise = createGame()
+  let wordMap
+  let wordColors = []
+
+  $: wordColors = wordMap ? generateHslColors(70, 80, wordMap.size) : []
 </script>
 
 <style>
@@ -22,7 +28,10 @@
   {#await promise}
     <p>Initialising...</p>
   {:then data}
-    <Board {data} />
+    <Board {data} bind:wordMap {wordColors} />
+    {#if wordMap}
+      <WordTags {wordMap} {wordColors} />
+    {/if}
   {/await}
 
 </div>
