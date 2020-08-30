@@ -1,5 +1,6 @@
 <script>
   import { fade } from 'svelte/transition'
+  import { generateHslColors } from '../../utils'
 
   let examples = [
     { link: 'listen', description: 'Anagrams using any of the letters', letters: 'listen', count: 53 },
@@ -9,6 +10,8 @@
     { link: 'h.g2e', description: 'Match a pattern', letters: 'h.g2e', count: 1 },
     { link: 'pref*', description: 'Words starting with', letters: 'pref*', count: 28 },
   ]
+
+  let exampleColors = generateHslColors(70, 80, examples.length)
 </script>
 
 <style>
@@ -30,7 +33,7 @@
 
   a {
     color: var(--primary-dark);
-    background-color: var(--separator-light);
+    background-color: hsl(var(--bg-color), 0.25);
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     display: flex;
@@ -44,8 +47,8 @@
   }
 
   .badge {
-    background-color: var(--separator);
-    color: var(--primary-light);
+    background-color: hsl(var(--bg-color), 0.5);
+    color: var(--primary-dark);
     border-radius: 100%;
     display: grid;
     place-items: center;
@@ -63,7 +66,7 @@
     <p>Try some of these searches</p>
 
     {#each examples as example, i}
-      <a href="#/search/{example.link}">
+      <a href="#/search/{example.link}" style="--bg-color:{exampleColors[i]}">
         <div>
           <b>{example.letters}</b>
           <p>{example.description}</p>
