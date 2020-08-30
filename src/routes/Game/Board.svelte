@@ -55,7 +55,6 @@
     width: calc((2rem + 0.25rem) * 10);
     grid-template-columns: repeat(10, 2.25rem);
     grid-template-rows: repeat(10, 2.25rem);
-    touch-action: none;
     user-select: none;
   }
 
@@ -84,7 +83,12 @@
   }
 </style>
 
-<div class="board" on:pointerdown={handleStart} on:pointermove={handleMove} on:pointerup={handleEnd}>
+<div
+  touch-action="none"
+  class="board"
+  on:pointerdown={handleStart}
+  on:pointermove={handleMove}
+  on:pointerup={handleEnd}>
   {#each grid as item, i}
     <span
       bind:this={cells[i]}
