@@ -78,6 +78,10 @@
     stroke-width: 24;
     stroke-linecap: round;
   }
+
+  svg.selection {
+    z-index: 1;
+  }
 </style>
 
 <div class="board" on:pointerdown={handleStart} on:pointermove={handleMove} on:pointerup={handleEnd}>
@@ -92,7 +96,7 @@
   {/each}
 
   {#if selection.i2 !== undefined}
-    <svg style="--stroke: 330, 100%, 71%">
+    <svg class="selection" style="--stroke: 330, 100%, 71%">
       <path d="M{selection.x1} {selection.y1}l{selection.x2 - selection.x1} {selection.y2 - selection.y1}" />
     </svg>
   {/if}
