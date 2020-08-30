@@ -18,20 +18,25 @@
     padding: 0.25rem 0.5rem;
     border-radius: 0.75rem;
     background-color: hsl(var(--bg-color), 0.5);
+    color: var(--primary-dark);
+    border: none;
     margin: 0.25rem;
   }
 
   .tag.solved {
     text-decoration: line-through;
     background-color: hsl(var(--bg-color), 0);
-    pointer-events: none;
   }
 </style>
 
 <div class="tagwrapper">
   {#each words as word, i}
-    <div style="--bg-color:{wordColors[i]}" class="tag" class:solved={solved.find((w) => w.word === word)}>
+    <a
+      href="#/word/{word}"
+      style="--bg-color:{wordColors[i]}"
+      class="tag"
+      class:solved={solved.find((w) => w.word === word)}>
       {word.toLowerCase()}
-    </div>
+    </a>
   {/each}
 </div>
