@@ -1,5 +1,6 @@
 <script>
-  import { fade } from 'svelte/transition'
+  import { fade, scale } from 'svelte/transition'
+  import { elasticOut } from 'svelte/easing'
   import Board from './Board.svelte'
   import { createGame } from '../../api'
   import { generateHslColors } from '../../utils'
@@ -8,6 +9,7 @@
   let data, grid, words, wordMap
   let wordColors = []
   let solved = []
+  let completed = false
 
   createGame().then((res) => {
     data = res
@@ -27,6 +29,10 @@
       }
     }
     if (word) solved = [...solved, { word, ...event.detail }]
+
+    if (solved.length === words.length) {
+      setTimeout(() => (completed = true), 1000)
+    }
   }
 </script>
 
@@ -39,6 +45,21 @@
     align-items: center;
     border-radius: 0.5rem;
   }
+
+  .completed {
+    position: fixed;
+    left: 0;
+    top: calc(30vh - 4rem);
+    z-index: 3;
+    width: 100vw;
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    text-align: center;
+  }
+
+  a {
+    color: var(--primary-light);
+  }
 </style>
 
 <div in:fade={{ duration: 500 }} class="page">
@@ -48,6 +69,15 @@
     <WordTags {words} {wordColors} {solved} />
   {:else}
     <p>Reading dictionary...</p>
+  {/if}
+
+  {#if completed}
+    <div in:scale={{ duration: 1000, easing: elasticOut }} class="completed">
+      <h1>Well Done!</h1>
+      <p>
+        <a href="#/game" on:click={() => location.reload()}>Try again</a>
+      </p>
+    </div>
   {/if}
 
 </div>

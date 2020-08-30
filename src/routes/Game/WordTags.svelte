@@ -23,7 +23,7 @@
 
   .tag.solved {
     text-decoration: line-through;
-    background-color: hsl(var(--bg-color), 0.25);
+    background-color: hsl(var(--bg-color), 0);
     pointer-events: none;
   }
 </style>
