@@ -17,7 +17,7 @@
   }
 
   input {
-    border: 1px solid var(--separator);
+    border: 1px solid rgba(var(--separator), 0.25);
     height: 2.5rem;
     letter-spacing: 0.1rem;
     border-radius: 0;
@@ -37,7 +37,7 @@
     height: 2.5rem;
     border: 0;
     padding: 0px;
-    color: var(--separator);
+    color: rgba(var(--separator), 0.25);
     font-size: 1.25rem;
   }
 

@@ -6,8 +6,7 @@
   --brand-light: #f7fafc;
   --brand-accent: #ffd700;
   --text-error: #e63946;
-  --separator: rgba(0, 0, 0, 0.25);
-  --separator-light: rgba(0, 0, 0, 0.1);
+  --separator: 0, 0, 0;
   --aside-width: 100%;
   --header-height: 5rem;
 }
@@ -18,8 +17,7 @@
   --primary-dark: #ffffff;
   --brand-light: #14213d;
   --brand-dark: #f7fafc;
-  --separator: rgba(255, 255, 255, 0.25);
-  --separator-light: rgba(255, 255, 155, 0.1);
+  --separator: 255, 255, 255;
 }
 
 html,

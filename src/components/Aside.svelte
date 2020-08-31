@@ -35,7 +35,7 @@
     transition: all 0.2s;
     color: var(--primary-dark);
     background-color: var(--primary-light);
-    border-top: 1px solid var(--separator);
+    border-top: 1px solid rgba(var(--separator), 0.25);
     z-index: 99;
   }
 
@@ -50,7 +50,7 @@
     text-decoration: none;
     padding: 1rem;
     padding-right: 0;
-    border-bottom: 1px solid var(--separator-light);
+    border-bottom: 1px solid rgba(var(--separator), 0.1);
   }
 
   .item:hover {
@@ -76,7 +76,7 @@
     background-color: transparent;
     color: var(--primary-dark);
     padding: 8;
-    border-bottom: 1px solid var(--separator-light);
+    border-bottom: 1px solid rgba(var(--separator), 0.1);
   }
 
   button span {
