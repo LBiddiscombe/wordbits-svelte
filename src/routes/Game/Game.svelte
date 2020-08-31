@@ -77,7 +77,7 @@
   {/if}
 
   {#if completed}
-    <div in:scale={{ duration: 1000, easing: elasticOut }} class="completed">
+    <div in:scale={{ duration: 500, easing: elasticOut }} class="completed">
       <h1>Well Done!</h1>
       <p>
         <a href="#/game" on:click={() => location.reload()}>Try another</a>

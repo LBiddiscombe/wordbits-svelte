@@ -11,12 +11,38 @@
   const dispatch = createEventDispatcher()
   let cells = [...Array(100)]
   let selection = {}
+  let highlighted = ''
 
   function setXY(id) {
     return {
       x: cells[id].offsetLeft + 18,
       y: cells[id].offsetTop + 18,
     }
+  }
+
+  function getPath(selection) {
+    const { i1, i2, x1, y1, x2, y2 } = selection
+    const getId = (x, y) => y * 10 + x
+    const getXY = (id) => [id % 10, Math.floor(id / 10)]
+    const path = []
+
+    let curId = i1
+    let [endX, endY] = getXY(i2)
+    path.push(grid[curId])
+
+    if (i2 !== curId) {
+      do {
+        let [curX, curY] = getXY(curId)
+        if (curX < endX) curX += 1
+        if (curX > endX) curX -= 1
+        if (curY < endY) curY += 1
+        if (curY > endY) curY -= 1
+        curId = getId(curX, curY)
+        path.push(grid[curId])
+      } while (curId != i2 && path.length < 10)
+    }
+
+    return path.join('')
   }
 
   function handleStart(e) {
@@ -36,6 +62,7 @@
     // valid selection if start and end are in same row, column or on a diagonal
     if (x1 === x2 || y1 === y2 || Math.abs(x1 - x2) === Math.abs(y1 - y2)) {
       selection = { ...selection, i2, x2, y2 }
+      highlighted = getPath(selection)
     }
   }
 
@@ -44,6 +71,7 @@
       ...selection,
     })
     selection = {}
+    highlighted = ''
   }
 </script>
 
@@ -81,7 +109,17 @@
   svg.selection {
     z-index: 1;
   }
+
+  .highlighted {
+    margin: 0;
+    min-height: 30px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+  }
 </style>
+
+<p class="highlighted">{highlighted}</p>
 
 <div
   touch-action="none"
