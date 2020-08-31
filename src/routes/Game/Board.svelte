@@ -89,6 +89,7 @@
   .item {
     display: grid;
     place-items: center;
+    font-size: 1.25rem;
     font-weight: 600;
     z-index: 2;
   }
@@ -102,7 +103,7 @@
   svg path {
     stroke: hsl(var(--stroke));
     stroke-opacity: 0.75;
-    stroke-width: 24;
+    stroke-width: 30;
     stroke-linecap: round;
   }
 
@@ -112,8 +113,8 @@
 
   .highlighted {
     margin: 0;
-    min-height: 30px;
-    font-size: 1.5rem;
+    min-height: 40px;
+    font-size: 2rem;
     font-weight: 600;
     text-align: center;
   }
