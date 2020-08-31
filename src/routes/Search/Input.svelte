@@ -11,8 +11,9 @@
     margin-top: 1rem;
     display: flex;
     position: relative;
-    width: calc(100% - 1rem);
-    max-width: 350px;
+    width: 100%;
+    max-width: 480px;
+    align-self: center;
   }
 
   input {

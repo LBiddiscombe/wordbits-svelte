@@ -1,79 +1,70 @@
 <script>
   import { fade } from 'svelte/transition'
+  import { push } from 'svelte-spa-router'
   import { generateHslColors } from '../../utils'
+  import Input from '../Search/Input.svelte'
 
-  let examples = [
-    { link: 'listen', description: 'Anagrams using any of the letters', letters: 'listen', count: 53 },
-    { link: 'listen%2F', description: 'Anagrams using all the letters', letters: 'listen/', count: 5 },
-    { link: 'ha.e', description: 'Match a single missing character', letters: 'ha.e', count: 6 },
-    { link: 'h3e', description: 'Multiple missing characters', letters: 'h3e', count: 10 },
-    { link: 'h.g2e', description: 'Match a pattern', letters: 'h.g2e', count: 1 },
-    { link: 'pref*', description: 'Words starting with', letters: 'pref*', count: 28 },
-  ]
+  let value = ''
 
-  let exampleColors = generateHslColors(70, 80, examples.length)
+  const cardColors = generateHslColors(70, 80, 3)
 </script>
 
 <style>
   .page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 100%;
     width: 100%;
     padding: 0;
     padding-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
     border-radius: 0.5rem;
-    align-items: center;
   }
 
-  .container {
-    display: flex;
-    flex-direction: column;
+  p {
+    text-align: center;
   }
 
-  a {
-    color: var(--primary-dark);
-    background-color: hsl(var(--bg-color), 0.25);
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
+  .card {
+    position: relative;
     display: flex;
     align-items: center;
-    padding: 0.5rem 1rem;
-  }
-
-  a p {
-    margin: 0;
-    margin-right: 1rem;
-  }
-
-  .badge {
+    justify-content: center;
+    min-height: 8rem;
+    width: calc(100% - 1rem);
+    max-width: 640px;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
     background-color: hsl(var(--bg-color), 0.5);
     color: var(--primary-dark);
-    border-radius: 100%;
-    display: grid;
-    place-items: center;
-    width: 2rem;
-    height: 2rem;
-    font-weight: bold;
-    margin-left: auto;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .soon {
+    position: absolute;
+    font-size: 0.75rem;
+    right: 1rem;
+    top: 1rem;
+    background-color: var(--primary-light);
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
   }
 </style>
 
 <div in:fade={{ duration: 500 }} class="page">
 
-  <div class="container">
+  <Input bind:value on:submit={() => push(`/search/${value}`)} on:click={() => push('/search')} />
 
-    <p>Try some of these searches</p>
+  <p>Jump straight in with your search above or try out our other features</p>
 
-    {#each examples as example, i}
-      <a href="#/search/{example.link}" style="--bg-color:{exampleColors[i]}">
-        <div>
-          <b>{example.letters}</b>
-          <p>{example.description}</p>
-        </div>
-        <div class="badge">{example.count}</div>
-      </a>
-    {/each}
-  </div>
+  <a href="#/search" class="card" style="--bg-color: {cardColors[0]}">Search</a>
+
+  <a href="#/game" class="card" style="--bg-color: {cardColors[1]}">Wordsearch</a>
+
+  <a href="#/" class="card" style="--bg-color: {cardColors[2]}">
+    Codewords
+    <span class="soon">Coming Soon!</span>
+  </a>
 
 </div>
