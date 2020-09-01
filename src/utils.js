@@ -31,16 +31,20 @@ export function generateHslColors(saturation, lightness, amount) {
 }
 
 export function getLocalStorageSize() {
-  let allStrings = ''
-  for (let key in window.localStorage) {
-    if (window.localStorage.hasOwnProperty(key)) {
-      allStrings += window.localStorage[key]
-    }
-  }
-  for (let key in window.sessionStorage) {
-    if (window.sessionStorage.hasOwnProperty(key)) {
-      allStrings += window.sessionStorage[key]
-    }
-  }
-  return allStrings ? 3 + Math.ceil((allStrings.length * 16) / (8 * 1024)) + ' KB' : '0 KB'
+  const local = new Blob(Object.entries(localStorage)).size
+  const session = new Blob(Object.entries(sessionStorage)).size
+
+  return formatBytes(local + session)
+}
+
+export function formatBytes(bytes, decimals = 2) {
+  if (bytes === 0) return '0 Bytes'
+
+  const k = 1024
+  const dm = decimals < 0 ? 0 : decimals
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
 }
