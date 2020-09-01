@@ -23,7 +23,7 @@ export function generateHslColors(saturation, lightness, amount) {
   let huedelta = Math.trunc(360 / amount)
 
   for (let i = 0; i < amount; i++) {
-    let hue = (i * huedelta + 60) % 360 // start at yellow - 60
+    let hue = (i * huedelta + 120) % 360 // start at green - 120
     colors.push(`${hue},${saturation}%,${lightness}%`)
   }
 
