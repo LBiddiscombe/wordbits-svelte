@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Logo from './Logo.svelte'
   import Hamburger from './Hamburger.svelte'
 
   export let checked: boolean = false
@@ -25,7 +24,7 @@
   }
 
   a {
-    color: var(--primary-dark);
+    color: var(--color-foreground);
   }
 
   @media screen and (min-width: 800px) {

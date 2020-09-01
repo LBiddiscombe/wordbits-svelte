@@ -17,13 +17,13 @@
   }
 
   input {
-    border: 1px solid rgba(var(--separator), 0.25);
+    border: 1px solid rgba(var(--color-base), 0.25);
     height: 2.5rem;
     letter-spacing: 0.1rem;
     border-radius: 0;
     padding-left: 2.5rem;
     color: var(--primary-dark);
-    background-color: var(--primary-light);
+    background-color: var(--color-background);
     flex: 1;
     font-size: 1.25rem;
     -webkit-appearance: none;
@@ -37,7 +37,7 @@
     height: 2.5rem;
     border: 0;
     padding: 0px;
-    color: rgba(var(--separator), 0.25);
+    color: rgba(var(--color-base), 0.25);
     font-size: 1.25rem;
   }
 

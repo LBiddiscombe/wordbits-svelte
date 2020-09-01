@@ -19,7 +19,7 @@
     margin: 0 1rem;
     font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
     font-size: 1.25rem;
-    color: var(--brand-dark);
+    color: var(--color-foreground);
   }
 
   button {

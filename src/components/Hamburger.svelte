@@ -18,7 +18,7 @@
   .nav-icon:after,
   .nav-icon:before,
   .nav-icon div {
-    background-color: var(--brand-dark);
+    background-color: var(--color-foreground);
     border-radius: 3px;
     content: '';
     display: block;

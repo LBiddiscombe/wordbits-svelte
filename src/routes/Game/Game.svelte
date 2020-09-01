@@ -57,12 +57,12 @@
     z-index: 3;
     width: 100vw;
     background-color: var(--primary-dark);
-    color: var(--primary-light);
+    color: var(--color-background);
     text-align: center;
   }
 
   a {
-    color: var(--primary-light);
+    color: var(--color-background);
     text-decoration: underline;
   }
 </style>

@@ -30,7 +30,7 @@
     flex-direction: column;
     margin: -2rem auto 1rem auto;
     z-index: 2;
-    color: var(--primary-dark);
+    color: var(--color-foreground);
   }
 </style>
 

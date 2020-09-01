@@ -59,12 +59,12 @@
     grid-template-columns: repeat(4, 1rem);
     grid-template-rows: repeat(4, 1rem);
     place-items: center;
-    color: rgba(var(--separator), 0.5);
+    color: rgba(var(--color-base), 0.5);
   }
 
   .card .image {
     margin-right: 1rem;
-    color: rgba(var(--separator), 0.5);
+    color: rgba(var(--color-base), 0.5);
   }
 
   .soon {
