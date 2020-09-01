@@ -22,7 +22,7 @@
     letter-spacing: 0.1rem;
     border-radius: 0;
     padding-left: 2.5rem;
-    color: var(--primary-dark);
+    color: var(--color-foreground);
     background-color: var(--color-background);
     flex: 1;
     font-size: 1.25rem;
@@ -48,7 +48,7 @@
     padding: 0;
     display: inline-block;
     background: none;
-    color: var(--primary-dark);
+    color: var(--color-foreground);
     border: none;
   }
 </style>

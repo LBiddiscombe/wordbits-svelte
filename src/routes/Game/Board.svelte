@@ -103,7 +103,7 @@
   svg path {
     stroke: hsl(var(--stroke));
     stroke-opacity: 0.75;
-    stroke-width: 30;
+    stroke-width: 1.5rem;
     stroke-linecap: round;
   }
 

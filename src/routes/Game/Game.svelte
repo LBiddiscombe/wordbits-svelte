@@ -16,7 +16,7 @@
     words = res.words
     grid = res.grid
     wordMap = res.wordMap
-    wordColors = generateHslColors(70, 80, words.length)
+    wordColors = generateHslColors(100, 60, words.length)
   })
 
   function handleSelection(event) {
@@ -56,7 +56,7 @@
     top: calc(30vh - 4rem);
     z-index: 3;
     width: 100vw;
-    background-color: var(--primary-dark);
+    background-color: var(--color-foreground);
     color: var(--color-background);
     text-align: center;
   }

@@ -18,7 +18,7 @@
     padding: 0.25rem 0.5rem;
     border-radius: 0.75rem;
     background-color: hsl(var(--bg-color), 0.5);
-    color: var(--primary-dark);
+    color: var(--color-foreground);
     border: none;
     margin: 0.25rem;
   }

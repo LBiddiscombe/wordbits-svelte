@@ -7,7 +7,7 @@
 
   const { error, results, resultText } = data
   let groups = groupMapByLen(results)
-  let groupColor = generateHslColors(70, 80, groups.size)
+  let groupColor = generateHslColors(100, 60, groups.size)
 </script>
 
 <style>

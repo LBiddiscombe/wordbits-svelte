@@ -10,7 +10,7 @@
   let value = ''
   let wordsearch = 'plotliveoneswent'
 
-  const cardColors = generateHslColors(70, 80, 3)
+  const cardColors = generateHslColors(100, 60, 3)
 </script>
 
 <style>
@@ -40,7 +40,7 @@
     border-radius: 1rem;
     margin: 0.5rem;
     background-color: hsl(var(--bg-color), 0.5);
-    color: var(--primary-dark);
+    color: var(--color-foreground);
     font-size: 2rem;
     font-weight: 600;
   }
@@ -73,6 +73,7 @@
     right: 1rem;
     top: 1rem;
     background-color: hsl(var(--bg-color), 1);
+    color: var(--color-background);
     padding: 0.25rem 0.5rem;
     border-radius: 1rem;
   }

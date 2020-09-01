@@ -19,7 +19,7 @@
     { link: 'pref*', description: 'Words starting with', letters: 'pref*', count: 28 },
   ]
 
-  let exampleColors = generateHslColors(70, 80, examples.length)
+  let exampleColors = generateHslColors(100, 60, examples.length)
 
   // subscribing to the location store as the params object isn't updated in time when updating the search manually
   const unsubscribe = location.subscribe((route) => {
@@ -50,7 +50,7 @@
   }
 
   a {
-    color: var(--primary-dark);
+    color: var(--color-foreground);
     background-color: hsl(var(--bg-color), 0.25);
     border-radius: 0.5rem;
     margin-bottom: 1rem;
@@ -66,7 +66,7 @@
 
   .badge {
     background-color: hsl(var(--bg-color), 0.5);
-    color: var(--primary-dark);
+    color: var(--color-foreground);
     border-radius: 100%;
     display: grid;
     place-items: center;

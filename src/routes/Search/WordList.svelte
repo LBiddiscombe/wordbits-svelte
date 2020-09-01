@@ -7,7 +7,7 @@
 
 <style>
   .title {
-    color: var(--primary-dark);
+    color: var(--color-foreground);
     background-color: hsl(var(--bg-color), 0.5);
     border-radius: 0.5rem 0.5rem 0 0;
     padding: 0.5rem 1rem;
@@ -24,7 +24,7 @@
 
   button {
     border: none;
-    color: var(--primary-dark);
+    color: var(--color-foreground);
     background-color: transparent;
     text-decoration: underline;
     margin-bottom: 0;
