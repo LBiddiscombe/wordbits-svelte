@@ -1,43 +1,21 @@
 <script>
+  import { onMount } from 'svelte'
   import { fade, scale } from 'svelte/transition'
   import { elasticOut } from 'svelte/easing'
   import Board from './Board.svelte'
-  import { createGame } from '../../api'
-  import { generateHslColors } from '../../utils'
   import WordTags from './WordTags.svelte'
+  import { newGame, game, tryWord, solved, completed } from '../../stores/wordsearch'
 
-  let data, grid, words, wordMap
-  let wordColors = []
-  let solved = JSON.parse(localStorage.getItem('solved')) || []
-  let completed = false
-
-  createGame().then((res) => {
-    data = res
-    words = res.words
-    grid = res.grid
-    wordMap = res.wordMap
-    wordColors = generateHslColors(100, 60, words.length)
-  })
-
-  function handleSelection(event) {
-    const { i1, i2 } = event.detail
-    let word = null
-    for (let [key, value] of wordMap) {
-      if (value.i1 === i1 && value.i2 === i2) {
-        word = key
-        break
-      }
-    }
-    if (word) solved = [...solved, { word, ...event.detail }]
-
-    localStorage.setItem('solved', JSON.stringify(solved))
-
-    if (solved.length >= words.length) {
-      setTimeout(() => (completed = true), 1000)
-      localStorage.removeItem('game')
-      localStorage.removeItem('solved')
-    }
+  let words, grid, wordColors
+  $: {
+    words = $game.words
+    grid = $game.grid
+    wordColors = $game.wordColors
   }
+
+  onMount(() => {
+    newGame()
+  })
 </script>
 
 <style>
@@ -69,14 +47,14 @@
 
 <div in:fade={{ duration: 500 }} class="page">
 
-  {#if data}
-    <Board {grid} {words} {wordColors} {solved} on:selection={handleSelection} />
-    <WordTags {words} {wordColors} {solved} />
+  {#if words}
+    <Board {grid} {words} {wordColors} solved={$solved} on:selection={tryWord} />
+    <WordTags {words} {wordColors} solved={$solved} />
   {:else}
     <p>Reading dictionary...</p>
   {/if}
 
-  {#if completed}
+  {#if $completed}
     <div in:scale={{ duration: 500, easing: elasticOut }} class="completed">
       <h1>Well Done!</h1>
       <p>
