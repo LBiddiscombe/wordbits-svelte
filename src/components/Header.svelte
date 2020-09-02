@@ -50,7 +50,7 @@
     |
     <a href="#/search">Search</a>
     |
-    <a href="#/game">Game</a>
+    <a href="#/wordsearch">Wordsearch</a>
   </nav>
   <div class="menu-btn">
     <Hamburger bind:checked />

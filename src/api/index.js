@@ -35,15 +35,15 @@ async function getDefinition(word) {
   return data
 }
 
-async function createGame() {
-  const cacheKey = 'game'
+async function createWordsearch() {
+  const cacheKey = 'wordsearch'
   if (localStorage.getItem(cacheKey)) {
     const localData = JSON.parse(localStorage.getItem(cacheKey))
     localData.wordMap = new Map(localData.wordMap)
     return localData
   }
 
-  const response = await fetch(`/.netlify/functions/createGame`)
+  const response = await fetch(`/.netlify/functions/createWordsearch`)
   if (response.status !== 200) {
     console.error(`Game creation failed: ${response.status.toString()} - ${response.statusText}`)
     throw {
@@ -57,4 +57,4 @@ async function createGame() {
   return data
 }
 
-export { searchDictionary, getDefinition, createGame }
+export { searchDictionary, getDefinition, createWordsearch }

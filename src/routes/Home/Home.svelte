@@ -94,7 +94,7 @@
     </div>
   </a>
 
-  <a href="#/game" class="card" style="--bg-color: {cardColors[1]}">
+  <a href="#/wordsearch" class="card" style="--bg-color: {cardColors[1]}">
     <div class="contents">
       <div class="wordsearch">
         {#each [...wordsearch] as letter}

@@ -1,5 +1,5 @@
-import { derived, readable, writable } from 'svelte/store'
-import { createGame } from '../api'
+import { derived, writable } from 'svelte/store'
+import { createWordsearch } from '../api'
 import { generateHslColors } from '../utils'
 
 export const game = writable({})
@@ -9,7 +9,7 @@ export const completed = derived([game, solved], ([$game, $solved], set) => {
 })
 
 export async function newGame() {
-  const res = await createGame()
+  const res = await createWordsearch()
   game.set({
     ...res,
     wordColors: generateHslColors(100, 60, res.words.length),
@@ -44,7 +44,7 @@ export function tryWord(event) {
     localStorage.setItem('solved', JSON.stringify(get(solved)))
   }
 
-  if (get(solved)) {
+  if (get(completed)) {
     localStorage.removeItem('game')
     localStorage.removeItem('solved')
   }

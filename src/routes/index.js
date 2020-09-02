@@ -1,11 +1,11 @@
 import Home from './Home/Home.svelte'
-import Game from './Game/Game.svelte'
+import Wordsearch from './Wordsearch/Wordsearch.svelte'
 import Word from './Word.svelte'
 import Search from './Search/Search.svelte'
 
 const routes = {
   '/': Home,
-  '/game': Game,
+  '/wordsearch': Wordsearch,
   '/search/:letters?': Search,
   '/word/:word': Word,
 }

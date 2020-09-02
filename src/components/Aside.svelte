@@ -94,9 +94,9 @@
     <Icon data={faSearch} scale="2" class="icon" />
     <span>Search</span>
   </a>
-  <a href="#/game" class="item" on:click>
+  <a href="#/wordsearch" class="item" on:click>
     <Icon data={faTrophy} scale="2" class="icon" />
-    <span>Game</span>
+    <span>Wordsearch</span>
   </a>
   <p />
   <button on:click={clearCache}>
