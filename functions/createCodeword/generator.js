@@ -29,7 +29,7 @@ function generate(options) {
     maxLength: null,
     width: 13,
     height: 13,
-    effort: 100000,
+    effort: 10000,
   }
   options = Object.assign({}, defaults, options)
 
