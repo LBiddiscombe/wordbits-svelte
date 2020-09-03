@@ -98,6 +98,10 @@
     <Icon data={faTrophy} scale="2" class="icon" />
     <span>Wordsearch</span>
   </a>
+  <a href="#/codeword" class="item" on:click>
+    <Icon data={faTrophy} scale="2" class="icon" />
+    <span>Codeword</span>
+  </a>
   <p />
   <button on:click={clearCache}>
     <Icon data={faEraser} scale="2" class="icon" />

@@ -59,13 +59,11 @@ async function createWordsearch() {
 
 async function createCodeword() {
   const cacheKey = 'codeword'
-  /*
   if (localStorage.getItem(cacheKey)) {
     const localData = JSON.parse(localStorage.getItem(cacheKey))
     localData.wordMap = new Map(localData.wordMap)
     return localData
   }
-  */
 
   const response = await fetch(`/.netlify/functions/createCodeword`)
   if (response.status !== 200) {

@@ -7,7 +7,12 @@
     newGame()
   })
 
-  $: console.log($game.words)
+  let letters
+
+  $: {
+    letters = $game.words && $game.words.join('').split('')
+    letters = [...new Set(letters)].sort()
+  }
 </script>
 
 <style>
@@ -25,19 +30,29 @@
     margin: 0 auto;
     display: grid;
     place-items: center;
-    width: calc(1.5rem * 12);
-    grid-template-columns: repeat(12, 1.5rem);
-    grid-template-rows: repeat(12, 1.5rem);
+    grid-template-columns: repeat(13, 1.5rem);
+    grid-template-rows: repeat(13, 1.5rem);
+    gap: 0.25rem;
     user-select: none;
+  }
+
+  .item {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    border-radius: 0.25rem;
+    font-weight: 600;
   }
 </style>
 
 <div in:fade={{ duration: 500 }} class="page">
-  <h1>Codeword</h1>
   {#if $game.grid}
     <div class="board">
       {#each $game.grid as letter}
-        <span>{letter}</span>
+        <span class:item={letter !== ' '}>{letter}</span>
       {/each}
     </div>
   {:else}

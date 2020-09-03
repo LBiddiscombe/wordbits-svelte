@@ -1,10 +1,9 @@
 class CodeWord {
-  constructor(width, height, grid, words, wordMap) {
+  constructor(width, height, grid, words) {
     this.width = width
     this.height = height
     this.grid = grid
     this.words = words
-    this.wordMap = wordMap
   }
 
   get(x, y) {
@@ -26,10 +25,10 @@ class CodeWord {
 function generate(options) {
   const defaults = {
     words: [],
-    minLength: 4,
+    minLength: 3,
     maxLength: null,
-    width: 12,
-    height: 12,
+    width: 13,
+    height: 13,
     effort: 100000,
   }
   options = Object.assign({}, defaults, options)
@@ -150,9 +149,26 @@ function generate(options) {
     const dx = 0
     const dy = 1
     putWord(x, y, dx, dy, word)
+    return word
   }
 
-  putFirstWord()
+  function putSecondWord(firstWord) {
+    const x = 0
+    const y = Math.floor(options.height / 2)
+    const dx = 1
+    const dy = 0
+    const maxLengthWords = words.filter((word) => word.length === options.height)
+    const fittingWords = maxLengthWords.filter((word) => word.charAt(y) === firstWord.charAt(y))
+    const word = fittingWords[rand(fittingWords.length)]
+
+    putWord(x, y, dx, dy, word)
+    return word
+  }
+
+  const firstWord = putFirstWord()
+  putSecondWord(firstWord)
+
+  // Now brute force try and fit more words around them
   for (let i = 0; i < width * height * options.effort; i++) {
     if (used.length == words.length) break
     const word = words[rand(words.length)]
@@ -171,7 +187,7 @@ function generate(options) {
 
   used.sort()
 
-  return new CodeWord(width, height, grid, used, [...usedMap])
+  return new CodeWord(width, height, grid, used)
 }
 
 exports.generate = generate

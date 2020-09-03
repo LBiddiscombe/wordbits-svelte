@@ -105,12 +105,12 @@
     </div>
   </a>
 
-  <a href="#/" class="card" style="--bg-color: {cardColors[2]}">
+  <a href="#/codeword" class="card" style="--bg-color: {cardColors[2]}">
     <div class="contents">
       <div class="image">
         <Icon data={faTh} scale="4" class="icon" />
       </div>
-      Codewords
+      Codeword
     </div>
     <span class="soon">Coming Soon!</span>
   </a>

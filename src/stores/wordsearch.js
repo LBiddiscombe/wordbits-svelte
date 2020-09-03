@@ -45,7 +45,7 @@ export function tryWord(event) {
   }
 
   if (get(completed)) {
-    localStorage.removeItem('game')
+    localStorage.removeItem('wordsearch')
     localStorage.removeItem('solved')
   }
 }
