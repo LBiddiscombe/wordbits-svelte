@@ -57,4 +57,28 @@ async function createWordsearch() {
   return data
 }
 
-export { searchDictionary, getDefinition, createWordsearch }
+async function createCodeword() {
+  const cacheKey = 'codeword'
+  /*
+  if (localStorage.getItem(cacheKey)) {
+    const localData = JSON.parse(localStorage.getItem(cacheKey))
+    localData.wordMap = new Map(localData.wordMap)
+    return localData
+  }
+  */
+
+  const response = await fetch(`/.netlify/functions/createCodeword`)
+  if (response.status !== 200) {
+    console.error(`Game creation failed: ${response.status.toString()} - ${response.statusText}`)
+    throw {
+      error: 'Game creation failed, try again',
+    }
+  }
+  const data = await response.json()
+  // rehydrate the Map object from the json array returned
+  localStorage.setItem(cacheKey, JSON.stringify(data))
+  data.wordMap = new Map(data.wordMap)
+  return data
+}
+
+export { searchDictionary, getDefinition, createWordsearch, createCodeword }
