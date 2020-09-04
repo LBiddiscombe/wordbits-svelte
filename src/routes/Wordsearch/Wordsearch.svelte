@@ -29,11 +29,10 @@
   }
 
   .completed {
-    position: fixed;
-    left: 0;
-    top: calc(30vh - 4rem);
+    margin-top: 1rem;
     z-index: 3;
     width: 100vw;
+    max-width: 414px;
     background-color: var(--color-foreground);
     color: var(--color-background);
     text-align: center;
@@ -49,18 +48,18 @@
 
   {#if words}
     <Board {grid} {words} {wordColors} solved={$solved} on:selection={tryWord} />
-    <WordTags {words} {wordColors} solved={$solved} />
+    {#if $completed}
+      <div in:scale={{ duration: 500, easing: elasticOut }} class="completed">
+        <h1>Well Done!</h1>
+        <p>
+          <a href="#/game" on:click={() => location.reload()}>Try another</a>
+        </p>
+      </div>
+    {:else}
+      <WordTags {words} {wordColors} solved={$solved} />
+    {/if}
   {:else}
     <p>Reading dictionary...</p>
-  {/if}
-
-  {#if $completed}
-    <div in:scale={{ duration: 500, easing: elasticOut }} class="completed">
-      <h1>Well Done!</h1>
-      <p>
-        <a href="#/game" on:click={() => location.reload()}>Try another</a>
-      </p>
-    </div>
   {/if}
 
 </div>
