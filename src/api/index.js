@@ -61,7 +61,7 @@ async function createCodeword() {
   const cacheKey = 'codeword'
   if (localStorage.getItem(cacheKey)) {
     const localData = JSON.parse(localStorage.getItem(cacheKey))
-    localData.wordMap = new Map(localData.wordMap)
+    localData.letterMap = new Map(localData.letterMap)
     return localData
   }
 
@@ -75,7 +75,8 @@ async function createCodeword() {
   const data = await response.json()
   // rehydrate the Map object from the json array returned
   localStorage.setItem(cacheKey, JSON.stringify(data))
-  data.wordMap = new Map(data.wordMap)
+  data.letterMap = new Map(data.letterMap)
+  console.log(data.letterMap)
   return data
 }
 

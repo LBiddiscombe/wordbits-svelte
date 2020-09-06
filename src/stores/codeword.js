@@ -11,11 +11,3 @@ export async function newGame() {
     wordColors: generateHslColors(100, 60, res.words.length),
   })
 }
-
-// wrapper around the store to simplify reads from within this store
-function get(store) {
-  let value
-  const unsubscribe = store.subscribe((s) => (value = s))
-  unsubscribe()
-  return value
-}

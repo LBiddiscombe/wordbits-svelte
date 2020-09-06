@@ -2,17 +2,11 @@
   import { onMount } from 'svelte'
   import { fade } from 'svelte/transition'
   import { newGame, game } from '../../stores/codeword'
+  import Keyboard from './Keyboard.svelte'
 
   onMount(() => {
     newGame()
   })
-
-  let letters
-
-  $: {
-    letters = $game.words && $game.words.join('').split('')
-    letters = [...new Set(letters)].sort()
-  }
 </script>
 
 <style>
@@ -21,18 +15,21 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    border-radius: 0.5rem;
+    touch-action: manipulation;
   }
 
   .board {
     position: relative;
+    width: 100%;
+    max-width: 400px;
     margin: 0 auto;
     display: grid;
     place-items: center;
-    grid-template-columns: repeat(13, 1.5rem);
-    grid-template-rows: repeat(13, 1.5rem);
-    gap: 0.25rem;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(13, 2rem);
+    gap: 1px;
     user-select: none;
   }
 
@@ -43,7 +40,7 @@
     height: 100%;
     background-color: var(--color-foreground);
     color: var(--color-background);
-    border-radius: 0.25rem;
+    border-radius: 2px;
     font-weight: 600;
   }
 </style>
@@ -52,9 +49,10 @@
   {#if $game.grid}
     <div class="board">
       {#each $game.grid as letter}
-        <span class:item={letter !== ' '}>{letter}</span>
+        <span class:item={letter !== ' '}>{$game.letterMap.get(letter) || ' '}</span>
       {/each}
     </div>
+    <Keyboard />
   {:else}
     <p>Brute force attacking the problem...</p>
   {/if}

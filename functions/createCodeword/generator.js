@@ -1,9 +1,10 @@
 class CodeWord {
-  constructor(width, height, grid, words) {
+  constructor(width, height, grid, words, letterMap) {
     this.width = width
     this.height = height
     this.grid = grid
     this.words = words
+    this.letterMap = letterMap
   }
 
   get(x, y) {
@@ -39,13 +40,9 @@ function generate(options) {
     .filter((w) => /^[a-z]*/.test(w))
 
   let { width, height } = options
-
-  let grid = []
+  let grid = new Array(width * height).fill('')
   let used = []
   let usedMap = new Map()
-  for (let i = 0; i < width * height; i++) {
-    grid[i] = ''
-  }
 
   let dxs = [1, 0]
   let dys = [0, 1]
@@ -87,7 +84,7 @@ function generate(options) {
       const cur = get(x, y)
       const curdx = get(x + dx, y)
       const curdy = get(x, y + dy)
-      if (cur != '' && cur != l) return false
+      if (cur !== '' && cur !== l) return false
       if (curdx !== '' && curdx != l) return false
       if (curdy !== '' && curdy != l) return false
 
@@ -141,6 +138,15 @@ function generate(options) {
     })
   }
 
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
+    }
+
+    return array
+  }
+
   function putFirstWord() {
     const maxLengthWords = words.filter((word) => word.length === options.height)
     const word = maxLengthWords[rand(maxLengthWords.length)]
@@ -187,41 +193,17 @@ function generate(options) {
 
   used.sort()
 
-  return new CodeWord(width, height, grid, used)
+  let usedLetterMap = new Map()
+  let letters = used.join('').split('')
+  letters = [...new Set(letters)].sort()
+  letters = shuffle(letters)
+  const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ']
+
+  alphabet.forEach((letter) => {
+    usedLetterMap.set(letter, letters.findIndex((l) => l === letter) + 1)
+  })
+
+  return new CodeWord(width, height, grid, used, [...usedLetterMap])
 }
 
 exports.generate = generate
-
-/* 
-
-TODO: Utility function to create a random letter based on usage, state below;
-
-Letter	Usage	Weighting
-e	13%	11
-t	9.10%	8
-a	8.20%	8
-o	7.50%	7
-i	7%	7
-n	6.70%	7
-h	6.10%	6
-s	6.30%	6
-r	6%	5
-d	4.30%	4
-l	4%	4
-c	2.80%	3
-m	2.40%	3
-u	2.80%	3
-f	2.20%	2
-w	2.40%	2
-b	1.50%	2
-g	2%	2
-p	1.90%	2
-y	2%	2
-j	0.15%	1
-k	0.77%	1
-q	0.10%	1
-v	0.98%	1
-x	0.15%	1
-z	0.07%	1
-
-*/
