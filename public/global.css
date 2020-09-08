@@ -1,5 +1,5 @@
 :root {
-  --color-foreground: #2e2f30;
+  --color-foreground: #0c0613;
   --color-background: #ffffff;
   --brand-accent: #ffd700;
   --text-error: #e63946;
@@ -10,7 +10,7 @@
 
 [data-theme='dark'] {
   --color-foreground: #ffffff;
-  --color-background: #2e2f30;
+  --color-background: #0c0613;
   --color-base: 255, 255, 255;
 }
 

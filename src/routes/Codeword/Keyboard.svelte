@@ -1,4 +1,5 @@
 <script>
+  import { selectKey } from '../../stores/codeword'
   let keyboard = [[...'QWERTYUIOP'], [...'ASDFGHJKL'], [...'ZXCVBNM', 'DEL']]
 </script>
 
@@ -55,7 +56,7 @@
   {#each keyboard as row}
     <div class="row">
       {#each row as key}
-        <button class="key">{key}</button>
+        <button class="key" value={key} on:click={selectKey}>{key}</button>
       {/each}
     </div>
   {/each}

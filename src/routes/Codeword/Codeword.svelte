@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { fade } from 'svelte/transition'
-  import { newGame, game, solution } from '../../stores/codeword'
+  import { newGame, game } from '../../stores/codeword'
   import Grid from './Grid.svelte'
   import Keyboard from './Keyboard.svelte'
 

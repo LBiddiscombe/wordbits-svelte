@@ -1,26 +1,5 @@
 <script>
-  import { game, solution } from '../../stores/codeword'
-
-  let selected
-
-  let cells
-
-  function handleClick(e) {
-    selected = +e.target.dataset.code
-  }
-
-  $: {
-    const letterGrid = $game.letterGrid
-    const codeGrid = $game.codeGrid
-    if (letterGrid.length > 0) {
-      cells = letterGrid.map((letter, i) => {
-        const code = codeGrid[i]
-        if (solution[code]) return solution[code]
-        if (letter !== ' ') return code
-        return ' '
-      })
-    }
-  }
+  import { game, cells, selectCode, selectedCode } from '../../stores/codeword'
 </script>
 
 <style>
@@ -46,7 +25,7 @@
     height: 100%;
     background-color: var(--color-background);
     color: var(--color-foreground);
-    border: 1px solid var(--color-foreground);
+    border: 1px solid rgba(var(--color-base), 0.5);
     border-radius: 2px;
     font-size: 0.75rem;
   }
@@ -60,7 +39,7 @@
   }
 
   .highlight {
-    background-color: var(--brand-accent);
+    background-color: hotpink;
   }
 
   button:not(.tile) {
@@ -69,15 +48,15 @@
 </style>
 
 <div class="grid">
-  {#if cells}
-    {#each cells as value, i}
+  {#if $cells}
+    {#each $cells as value, i}
       <button
         data-letter={$game.letterGrid[i]}
         data-code={$game.codeGrid[i]}
         class:letter={isNaN(value)}
         class:tile={value !== ' '}
-        class:highlight={$game.codeGrid[i] === selected}
-        on:click={handleClick}>
+        class:highlight={$game.codeGrid[i] === $selectedCode}
+        on:click={selectCode}>
         {value}
       </button>
     {/each}
