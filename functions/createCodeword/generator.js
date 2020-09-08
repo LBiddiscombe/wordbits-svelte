@@ -1,14 +1,13 @@
 class CodeWord {
-  constructor(width, height, grid, words, letterMap) {
+  constructor(width, height, letterGrid, codeGrid) {
     this.width = width
     this.height = height
-    this.grid = grid
-    this.words = words
-    this.letterMap = letterMap
+    this.letterGrid = letterGrid
+    this.codeGrid = codeGrid
   }
 
   get(x, y) {
-    return this.grid[y * this.width + x]
+    return this.letterGrid[y * this.width + x]
   }
 
   toString() {
@@ -40,7 +39,8 @@ function generate(options) {
     .filter((w) => /^[a-z]*/.test(w))
 
   let { width, height } = options
-  let grid = new Array(width * height).fill('')
+  const alphabet = shuffle([...'ABCDEFGHIJKLMNOPQRSTUVWXYZ']).join('')
+  let letterGrid = new Array(width * height).fill('')
   let used = []
   let usedMap = new Map()
 
@@ -52,11 +52,11 @@ function generate(options) {
   }
 
   function get(x, y) {
-    return grid[y * width + x]
+    return letterGrid[y * width + x]
   }
 
   function set(x, y, letter) {
-    grid[y * width + x] = letter
+    letterGrid[y * width + x] = letter
   }
 
   function tryWord(x, y, dx, dy, word) {
@@ -176,7 +176,7 @@ function generate(options) {
 
   // Now brute force try and fit more words around them
   for (let i = 0; i < width * height * options.effort; i++) {
-    if (used.length == words.length) break
+    if (usedMap.size == words.length) break
     const word = words[rand(words.length)]
     if (usedMap.has(word)) continue
     const x = rand(width)
@@ -187,23 +187,10 @@ function generate(options) {
     if (tryWord(x, y, dx, dy, word)) putWord(x, y, dx, dy, word)
   }
 
-  for (let i = 0; i < grid.length; i++) {
-    if (grid[i] == '') grid[i] = ' '
-  }
+  letterGrid = letterGrid.map((letter) => letter || ' ')
+  codeGrid = letterGrid.map((letter) => alphabet.indexOf(letter) + 1)
 
-  used.sort()
-
-  let usedLetterMap = new Map()
-  let letters = used.join('').split('')
-  letters = [...new Set(letters)].sort()
-  letters = shuffle(letters)
-  const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ']
-
-  alphabet.forEach((letter) => {
-    usedLetterMap.set(letter, letters.findIndex((l) => l === letter) + 1)
-  })
-
-  return new CodeWord(width, height, grid, used, [...usedLetterMap])
+  return new CodeWord(width, height, letterGrid, codeGrid)
 }
 
 exports.generate = generate

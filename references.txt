@@ -34,3 +34,8 @@ netlify functions:invoke createGame --no-identity
 
 wordsearch algorithm
 https://github.com/sbj42/word-search-generator
+
+store examples
+https://github.com/john-smilga/svelte-store-project
+https://fireship.io/snippets/custom-svelte-stores/
+https://www.swyx.io/writing/svelte-auth/
