@@ -1,10 +1,14 @@
 import { writable, derived } from 'svelte/store'
 import { createCodeword } from '../api'
+import { randomInt } from '../utils'
 
+let gameInProgress = false
+
+export const showErrors = writable(true)
 export const game = writable({})
 export const solution = createSolution()
 export const selectedCode = writable(0)
-export const cells = derived([game, solution], ([$game, $solution]) => {
+export const gameGrid = derived([game, solution], ([$game, $solution]) => {
   const letterGrid = $game.letterGrid
   const codeGrid = $game.codeGrid
 
@@ -16,6 +20,10 @@ export const cells = derived([game, solution], ([$game, $solution]) => {
       return ' '
     })
   }
+})
+export const solved = derived([game, gameGrid], ([$game, $cells]) => {
+  const letterGrid = $game.letterGrid
+  return JSON.stringify($cells) === JSON.stringify(letterGrid)
 })
 
 export function selectCode(e) {
@@ -30,7 +38,10 @@ export function selectKey(e) {
   const code = get(selectedCode)
   if (code) {
     solution.makeGuess(code, key)
-    selectedCode.set(0)
+    if (get(solved)) {
+      localStorage.removeItem('codeword_solution')
+      localStorage.removeItem('codeword')
+    }
   }
 }
 
@@ -39,7 +50,20 @@ export async function newGame() {
   game.set({
     ...res,
   })
-  console.log('newGame', res)
+
+  if (!gameInProgress) {
+    const { letterGrid, codeGrid, startingSolution } = res
+    solution.set(startingSolution)
+    const maxStarterLetters = 15
+    let count = 0
+    while (count < maxStarterLetters) {
+      const id = randomInt(codeGrid.length)
+      if (codeGrid[id] && !get(solution).includes(codeGrid[id])) {
+        solution.makeGuess(codeGrid[id], letterGrid[id])
+        count++
+      }
+    }
+  }
 }
 
 function createSolution() {
@@ -47,12 +71,16 @@ function createSolution() {
   const json = JSON.parse(localStorage.getItem('codeword_solution'))
   if (json) {
     set(json)
+    gameInProgress = true
   }
 
   return {
+    set,
     subscribe,
     makeGuess: (code, letter) => {
       update((guess) => {
+        // remove other guesses for this letter
+        guess = guess.map((value) => (value === letter ? '' : value))
         guess[code] = letter
         localStorage.setItem('codeword_solution', JSON.stringify(guess))
         return guess

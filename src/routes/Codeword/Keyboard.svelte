@@ -1,6 +1,10 @@
 <script>
-  import { selectKey } from '../../stores/codeword'
+  import { selectKey, solution } from '../../stores/codeword'
   let keyboard = [[...'QWERTYUIOP'], [...'ASDFGHJKL'], [...'ZXCVBNM', 'DEL']]
+  let solved = []
+  $: {
+    solved = $solution.filter((item) => item)
+  }
 </script>
 
 <style>
@@ -50,13 +54,17 @@
     border-radius: 0.25rem;
     font-weight: 600;
   }
+
+  .solved {
+    background-color: rgba(var(--color-base), 0.5);
+  }
 </style>
 
 <div class="keyboard">
   {#each keyboard as row}
     <div class="row">
       {#each row as key}
-        <button class="key" value={key} on:click={selectKey}>{key}</button>
+        <button class="key" class:solved={solved.includes(key)} value={key} on:click={selectKey}>{key}</button>
       {/each}
     </div>
   {/each}

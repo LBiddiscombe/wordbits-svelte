@@ -30,6 +30,10 @@ export function generateHslColors(saturation, lightness, amount) {
   return colors
 }
 
+export function randomInt(max) {
+  return Math.floor(Math.random() * max)
+}
+
 export function getLocalStorageSize() {
   const local = new Blob(Object.entries(localStorage)).size
   const session = new Blob(Object.entries(sessionStorage)).size

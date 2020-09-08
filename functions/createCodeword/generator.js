@@ -1,9 +1,10 @@
 class CodeWord {
-  constructor(width, height, letterGrid, codeGrid) {
+  constructor(width, height, letterGrid, codeGrid, startingSolution) {
     this.width = width
     this.height = height
     this.letterGrid = letterGrid
     this.codeGrid = codeGrid
+    this.startingSolution = startingSolution
   }
 
   get(x, y) {
@@ -148,7 +149,7 @@ function generate(options) {
   }
 
   function putFirstWord() {
-    const maxLengthWords = words.filter((word) => word.length === options.height)
+    const maxLengthWords = words.filter((word) => word.length <= options.height)
     const word = maxLengthWords[rand(maxLengthWords.length)]
     const x = Math.floor(options.width / 2)
     const y = 0
@@ -172,7 +173,7 @@ function generate(options) {
   }
 
   const firstWord = putFirstWord()
-  putSecondWord(firstWord)
+  /* putSecondWord(firstWord) */
 
   // Now brute force try and fit more words around them
   for (let i = 0; i < width * height * options.effort; i++) {
@@ -189,8 +190,9 @@ function generate(options) {
 
   letterGrid = letterGrid.map((letter) => letter || ' ')
   codeGrid = letterGrid.map((letter) => alphabet.indexOf(letter) + 1)
+  startingSolution = ['', ...alphabet].map((letter) => (!letterGrid.includes(letter) ? letter : ''))
 
-  return new CodeWord(width, height, letterGrid, codeGrid)
+  return new CodeWord(width, height, letterGrid, codeGrid, startingSolution)
 }
 
 exports.generate = generate
