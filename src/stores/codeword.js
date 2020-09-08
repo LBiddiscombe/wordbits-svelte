@@ -12,7 +12,7 @@ export const gameGrid = derived([game, solution], ([$game, $solution]) => {
   const letterGrid = $game.letterGrid
   const codeGrid = $game.codeGrid
 
-  if (letterGrid?.length > 0) {
+  if (letterGrid && letterGrid.length > 0) {
     return letterGrid.map((letter, i) => {
       const code = codeGrid[i]
       if ($solution[code]) return $solution[code]
