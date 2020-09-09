@@ -37,7 +37,7 @@ export function selectKey(e) {
   if (key === 'DEL') key = ''
   const code = get(selectedCode)
   if (code) {
-    solution.makeGuess(code, key)
+    solution.linkCodeLetter(code, key)
     if (get(solved)) {
       localStorage.removeItem('codeword_solution')
       localStorage.removeItem('codeword')
@@ -59,7 +59,7 @@ export async function newGame() {
     while (count < maxStarterLetters) {
       const id = randomInt(codeGrid.length)
       if (codeGrid[id] && !get(solution).includes(codeGrid[id])) {
-        solution.makeGuess(codeGrid[id], letterGrid[id])
+        solution.linkCodeLetter(codeGrid[id], letterGrid[id])
         count++
       }
     }
@@ -77,7 +77,7 @@ function createSolution() {
   return {
     set,
     subscribe,
-    makeGuess: (code, letter) => {
+    linkCodeLetter: (code, letter) => {
       update((guess) => {
         // remove other guesses for this letter
         guess = guess.map((value) => (value === letter ? '' : value))
