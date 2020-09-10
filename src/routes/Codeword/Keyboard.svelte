@@ -13,6 +13,7 @@
     margin-top: 3rem;
     width: 100vmin;
     max-width: 500px;
+    font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
   }
 
   @media (max-width: 600px) {
@@ -56,6 +57,7 @@
     border-radius: 0.25rem;
     font-weight: 600;
     border: none;
+    font-size: 1.25rem;
   }
 
   .solved {
