@@ -23,7 +23,9 @@ export const gameGrid = derived([game, solution], ([$game, $solution]) => {
 })
 export const solved = derived([game, gameGrid], ([$game, $cells]) => {
   const letterGrid = $game.letterGrid
-  return JSON.stringify($cells) === JSON.stringify(letterGrid)
+  const result = JSON.stringify($cells) === JSON.stringify(letterGrid)
+  if (result) selectedCode.set(0)
+  return result
 })
 export const startingSolution = derived(game, ($game) => $game.startingSolution)
 
