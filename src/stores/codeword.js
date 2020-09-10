@@ -25,11 +25,15 @@ export const solved = derived([game, gameGrid], ([$game, $cells]) => {
   const letterGrid = $game.letterGrid
   return JSON.stringify($cells) === JSON.stringify(letterGrid)
 })
+export const startingSolution = derived(game, ($game) => $game.startingSolution)
 
 export function selectCode(e) {
+  const startingSolution = get(game).startingSolution
   const code = +e.target.dataset.code
-  if (code === get(selectedCode)) selectedCode.set(0)
-  else selectedCode.set(code)
+  if (startingSolution[code] === '') {
+    if (code === get(selectedCode)) selectedCode.set(0)
+    else selectedCode.set(code)
+  }
 }
 
 export function selectKey(e) {
@@ -52,17 +56,8 @@ export async function newGame() {
   })
 
   if (!gameInProgress) {
-    const { letterGrid, codeGrid, startingSolution } = res
+    const { startingSolution } = res
     solution.set(startingSolution)
-    const maxStarterLetters = 15
-    let count = 0
-    while (count < maxStarterLetters) {
-      const id = randomInt(codeGrid.length)
-      if (codeGrid[id] && !get(solution).includes(codeGrid[id])) {
-        solution.linkCodeLetter(codeGrid[id], letterGrid[id])
-        count++
-      }
-    }
   }
 }
 

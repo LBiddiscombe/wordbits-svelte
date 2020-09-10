@@ -4,18 +4,17 @@
 
 <style>
   .wrapper {
-    width: 100vmin;
-    height: 100vmin;
-    max-height: 400px;
-    max-width: 400px;
+    width: calc(100vmin - 2rem);
+    height: calc(100vmin - 2rem);
+    max-height: 500px;
+    max-width: 500px;
     padding: 0.5rem;
-    xbackground-color: rgba(var(--color-base), 0.1);
+    border-radius: 0rem;
+    margin: 1rem;
   }
 
   .grid {
-    position: relative;
     width: 100%;
-    max-width: 400px;
     height: 100%;
     margin: 0 auto;
     display: grid;
@@ -34,9 +33,8 @@
     padding: 0 4px;
     width: 100%;
     height: 100%;
-    background-color: var(--color-background);
+    background-color: rgba(var(--color-base), 0.15);
     color: var(--color-foreground);
-    border: 1px solid rgba(var(--color-base), 0.5);
     border-radius: 2px;
     font-size: 0.75rem;
   }
@@ -45,7 +43,7 @@
     place-items: center;
     background-color: var(--color-foreground);
     color: var(--color-background);
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
   }
 

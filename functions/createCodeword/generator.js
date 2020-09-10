@@ -192,6 +192,16 @@ function generate(options) {
   codeGrid = letterGrid.map((letter) => alphabet.indexOf(letter) + 1)
   startingSolution = ['', ...alphabet].map((letter) => (!letterGrid.includes(letter) ? letter : ''))
 
+  const maxStarterLetters = 3
+  let count = 0
+  while (count < maxStarterLetters) {
+    const id = rand(codeGrid.length)
+    if (codeGrid[id] && !startingSolution.includes(codeGrid[id])) {
+      startingSolution[codeGrid[id]] = letterGrid[id]
+      count++
+    }
+  }
+
   return new CodeWord(width, height, letterGrid, codeGrid, startingSolution)
 }
 
