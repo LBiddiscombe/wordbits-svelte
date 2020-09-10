@@ -26,7 +26,7 @@
     margin-top: 1rem;
     z-index: 3;
     width: 100vw;
-    max-width: 414px;
+    max-width: 500px;
     background-color: var(--color-foreground);
     color: var(--color-background);
     text-align: center;

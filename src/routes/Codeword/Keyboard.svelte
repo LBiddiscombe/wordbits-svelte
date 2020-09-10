@@ -1,23 +1,37 @@
 <script>
-  import { selectKey, solution, startingSolution } from '../../stores/codeword'
+  import { selectKey, showErrors, solution, startingSolution } from '../../stores/codeword'
   let keyboard = [[...'QWERTYUIOP'], [...'ASDFGHJKL'], [...'ZXCVBNM', 'DEL']]
   let solved = []
   $: {
     solved = $solution.filter((item) => item)
   }
+
+  function handleReset() {
+    if (confirm('Are you sure you want to restart this level?')) {
+      solution.reset()
+    }
+  }
 </script>
 
 <style>
+  .keyboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-background);
+    width: 100vw;
+    max-width: 500px;
+  }
+
   .keyboard {
     margin: 0 auto;
-    margin-top: 3rem;
+    margin-top: 1rem;
     width: 100vmin;
     max-width: 500px;
     font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
   }
 
   @media (max-width: 600px) {
-    .keyboard {
+    .keyboard-wrapper {
       position: fixed;
       bottom: 1rem;
     }
@@ -30,19 +44,9 @@
     justify-content: flex-start;
   }
 
-  .row:nth-child(2) {
-    margin-left: 0.75rem;
-    width: calc(100% - 0.75rem);
-  }
-
-  .row:nth-child(3) {
-    margin-left: 1.5rem;
-    width: calc(100% - 1.5rem);
-  }
-
   .row:nth-child(3) .key:last-child {
-    width: 3rem;
-    background-color: var(--color-error);
+    width: 4rem;
+    color: var(--color-error);
   }
 
   .key {
@@ -72,21 +76,39 @@
     text-decoration: line-through;
     border: none;
   }
+
+  .btn-bar {
+    margin: 0 0.25rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .reset {
+    background-color: var(--color-error);
+    color: white;
+    border: none;
+  }
 </style>
 
-<div class="keyboard">
-  {#each keyboard as row}
-    <div class="row">
-      {#each row as key}
-        <button
-          disabled={$startingSolution.includes(key)}
-          class="key"
-          class:solved={solved.includes(key) && !$startingSolution.includes(key)}
-          value={key}
-          on:click={selectKey}>
-          {key}
-        </button>
-      {/each}
-    </div>
-  {/each}
+<div class="keyboard-wrapper">
+  <div class="btn-bar">
+    <button on:click={() => showErrors.set(true)}>Show Errors</button>
+    <button class="reset" on:click={handleReset}>Reset</button>
+  </div>
+  <div class="keyboard">
+    {#each keyboard as row}
+      <div class="row">
+        {#each row as key}
+          <button
+            disabled={$startingSolution.includes(key)}
+            class="key"
+            class:solved={solved.includes(key) && !$startingSolution.includes(key)}
+            value={key}
+            on:click={selectKey}>
+            {key}
+          </button>
+        {/each}
+      </div>
+    {/each}
+  </div>
 </div>

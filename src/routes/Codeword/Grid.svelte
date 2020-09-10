@@ -10,7 +10,7 @@
     max-width: 500px;
     padding: 0.5rem;
     border-radius: 0rem;
-    margin: 1rem;
+    margin: 0 1rem;
   }
 
   .grid {
@@ -48,7 +48,7 @@
   }
 
   .letter.wrong.highlight {
-    outline: 2px solid var(--color-error);
+    outline: 3px solid var(--color-error);
   }
 
   .letter.wrong:not(.highlight) {

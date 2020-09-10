@@ -32,6 +32,7 @@ export const startingSolution = derived(game, ($game) => $game.startingSolution)
 export function selectCode(e) {
   const startingSolution = get(game).startingSolution
   const code = +e.target.dataset.code
+  showErrors.set(false)
   if (startingSolution[code] === '') {
     if (code === get(selectedCode)) selectedCode.set(0)
     else selectedCode.set(code)
@@ -42,6 +43,7 @@ export function selectKey(e) {
   let key = e.target.value
   if (key === 'DEL') key = ''
   const code = get(selectedCode)
+  showErrors.set(false)
   if (code) {
     solution.linkCodeLetter(code, key)
     if (get(solved)) {
@@ -83,7 +85,11 @@ function createSolution() {
         return guess
       })
     },
-    reset: () => set([]),
+    reset: () => {
+      const startingSolution = get(game).startingSolution
+      set(startingSolution)
+      localStorage.setItem('codeword_solution', JSON.stringify(startingSolution))
+    },
   }
 }
 
