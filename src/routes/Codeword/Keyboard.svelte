@@ -41,6 +41,7 @@
 
   .row:nth-child(3) .key:last-child {
     width: 3rem;
+    background-color: var(--color-error);
   }
 
   .key {
@@ -50,21 +51,23 @@
     place-items: center;
     margin: 0;
     margin-right: 0.25rem;
-    background-color: rgba(var(--color-base), 0.15);
-    color: var(--color-foreground);
+    background-color: var(--color-foreground);
+    color: var(--color-background);
     border-radius: 0.25rem;
     font-weight: 600;
     border: none;
   }
 
   .solved {
-    background-color: var(--color-foreground);
-    color: var(--color-background);
+    background-color: rgba(var(--color-base), 0.15);
+    color: var(--color-foreground);
+    text-decoration: line-through;
   }
 
   button:disabled {
     background-color: transparent;
     color: rgba(var(--color-base), 0.25);
+    text-decoration: line-through;
     border: none;
   }
 </style>
