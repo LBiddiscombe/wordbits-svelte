@@ -24,7 +24,6 @@
 
   .keyboard {
     margin: 0 auto;
-    margin-top: 1rem;
     width: 100vmin;
     max-width: 500px;
     font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
@@ -33,13 +32,12 @@
   @media (max-width: 600px) {
     .keyboard-wrapper {
       position: fixed;
-      bottom: 1rem;
+      bottom: 0.5rem;
     }
   }
 
   .row {
     display: flex;
-    min-height: 3rem;
     margin-top: 0.25rem;
     justify-content: flex-start;
   }
@@ -61,7 +59,7 @@
     border-radius: 0.25rem;
     font-weight: 600;
     border: none;
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .solved {
@@ -78,9 +76,15 @@
   }
 
   .btn-bar {
-    margin: 0 0.25rem;
+    margin: 0 0.25rem 0 0;
     display: flex;
     justify-content: space-between;
+    height: 1.5rem;
+  }
+
+  .btn-bar button {
+    padding: 0 1rem;
+    font-size: 0.75rem;
   }
 
   .reset {
