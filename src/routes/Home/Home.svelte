@@ -1,13 +1,9 @@
 <script>
   import { fade } from 'svelte/transition'
-  import { push } from 'svelte-spa-router'
   import Icon from 'svelte-awesome'
   import { faSearch, faTh } from '@fortawesome/free-solid-svg-icons'
   import { generateHslColors } from '../../utils'
-  import Input from '../Search/Input.svelte'
-  import App from '../../App.svelte'
-
-  let value = ''
+  
   let wordsearch = 'plotliveoneswent'
 
   const cardColors = generateHslColors(100, 60, 3)
@@ -67,23 +63,11 @@
     color: rgba(var(--color-base), 0.5);
   }
 
-  .soon {
-    position: absolute;
-    font-size: 0.75rem;
-    right: 1rem;
-    top: 1rem;
-    background-color: hsl(var(--bg-color), 1);
-    color: var(--color-background);
-    padding: 0.25rem 0.5rem;
-    border-radius: 1rem;
-  }
 </style>
 
 <div in:fade={{ duration: 500 }} class="page">
 
-  <Input bind:value on:submit={() => push(`/search/${value}`)} on:click={() => push('/search')} />
-
-  <p>Jump straight in with your search above or try out our other features</p>
+  <p>Search for anagrams, or try out one of our games</p>
 
   <a href="#/search" class="card" style="--bg-color: {cardColors[0]}">
     <div class="contents">
@@ -112,7 +96,6 @@
       </div>
       Codeword
     </div>
-    <span class="soon">Coming Soon!</span>
   </a>
 
 </div>
