@@ -52,3 +52,21 @@ export function formatBytes(bytes, decimals = 2) {
 
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
 }
+
+export function findMiddlestSpace(string) {
+  if (string.indexOf(' ') === -1) return string.length
+  const mid = Math.floor(string.length / 2)
+  const stringArray = [...string]
+  let middlest = string.length
+  let currentBest = string.length
+
+  stringArray.forEach((char, i) => {
+    if (char !== ' ') return
+    if (Math.abs(mid - i) < currentBest) {
+      middlest = i
+      currentBest = Math.abs(mid - i)
+    }
+  })
+
+  return middlest
+}

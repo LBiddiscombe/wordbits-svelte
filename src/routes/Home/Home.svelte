@@ -1,13 +1,57 @@
 <script>
   import { fade } from 'svelte/transition'
   import Icon from 'svelte-awesome'
-  import { faSearch, faTh } from '@fortawesome/free-solid-svg-icons'
+  import { faSearch, faTh, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons'
   import { generateHslColors } from '../../utils'
-  
+
   let wordsearch = 'plotliveoneswent'
 
-  const cardColors = generateHslColors(100, 60, 3)
+  const cardColors = generateHslColors(100, 60, 4)
 </script>
+
+<div in:fade={{ duration: 500 }} class="page">
+
+  <p>Search for anagrams, or try out one of our games</p>
+
+  <a href="#/search" class="card" style="--bg-color: {cardColors[0]}">
+    <div class="contents">
+      <div class="image">
+        <Icon data={faSearch} scale="4" class="icon" />
+      </div>
+      Search
+    </div>
+  </a>
+
+  <a href="#/wordsearch" class="card" style="--bg-color: {cardColors[1]}">
+    <div class="contents">
+      <div class="wordsearch">
+        {#each [...wordsearch] as letter}
+          <span>{letter}</span>
+        {/each}
+      </div>
+      Wordsearch
+    </div>
+  </a>
+
+  <a href="#/codeword" class="card" style="--bg-color: {cardColors[2]}">
+    <div class="contents">
+      <div class="image">
+        <Icon data={faTh} scale="4" class="icon" />
+      </div>
+      Codeword
+    </div>
+  </a>
+
+  <a href="#/dingbats" class="card" style="--bg-color: {cardColors[3]}">
+    <div class="contents">
+      <div class="image">
+        <Icon data={faPuzzlePiece} scale="4" class="icon" />
+      </div>
+      Dingbats
+    </div>
+  </a>
+
+</div>
 
 <style>
   .page {
@@ -62,40 +106,4 @@
     margin-right: 1rem;
     color: rgba(var(--color-base), 0.5);
   }
-
 </style>
-
-<div in:fade={{ duration: 500 }} class="page">
-
-  <p>Search for anagrams, or try out one of our games</p>
-
-  <a href="#/search" class="card" style="--bg-color: {cardColors[0]}">
-    <div class="contents">
-      <div class="image">
-        <Icon data={faSearch} scale="4" class="icon" />
-      </div>
-      Search
-    </div>
-  </a>
-
-  <a href="#/wordsearch" class="card" style="--bg-color: {cardColors[1]}">
-    <div class="contents">
-      <div class="wordsearch">
-        {#each [...wordsearch] as letter}
-          <span>{letter}</span>
-        {/each}
-      </div>
-      Wordsearch
-    </div>
-  </a>
-
-  <a href="#/codeword" class="card" style="--bg-color: {cardColors[2]}">
-    <div class="contents">
-      <div class="image">
-        <Icon data={faTh} scale="4" class="icon" />
-      </div>
-      Codeword
-    </div>
-  </a>
-
-</div>

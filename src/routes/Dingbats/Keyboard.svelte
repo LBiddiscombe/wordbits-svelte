@@ -1,47 +1,14 @@
 <script>
-  export let answer = ''
+  import { handleKey } from '../../stores/dingbats'
   let keyboard = [[...'QWERTYUIOP'], [...'ASDFGHJKL'], [...'ZXCVBNM', 'DEL']]
-  let answerArray = [],
-    guessArray = [],
-    guessIndex = 0
-
-  $: {
-    answerArray = [...answer.toUpperCase()]
-    guessArray = answerArray.map((letter) => (letter === ' ' ? '&nbsp;' : '_'))
-  }
-
-  function selectKey(e) {
-    let key = e.target.value
-    if (key === 'DEL') {
-      const charsToRemove = guessArray[guessIndex - 1] === '&nbsp;' ? 2 : 1
-      guessIndex = Math.max(guessIndex - charsToRemove, 0)
-      guessArray[guessIndex] = '_'
-    } else {
-      if (guessIndex < guessArray.length) {
-        guessArray[guessIndex] = key
-        guessIndex = Math.min(guessIndex + 1, guessArray.length)
-      }
-      if (guessArray[guessIndex] === '&nbsp;') guessIndex++
-    }
-  }
 </script>
 
 <div class="keyboard-wrapper">
-  <div class="answer-bar">
-    {#each guessArray as letter, i}
-      <span
-        class:correct={letter === answerArray[i]}
-        class:incorrect={letter !== '_' && letter !== ' ' && letter !== answerArray[i]}
-      >
-        {@html letter}
-      </span>
-    {/each}
-  </div>
   <div class="keyboard">
     {#each keyboard as row}
       <div class="row">
         {#each row as key}
-          <button class="key" on:click={selectKey} value={key}>{key}</button>
+          <button class="key" on:click={handleKey} value={key}>{key}</button>
         {/each}
       </div>
     {/each}
@@ -103,24 +70,5 @@
     color: rgba(var(--color-base), 0.25);
     text-decoration: line-through;
     border: none;
-  }
-
-  .answer-bar {
-    font-family: monospace;
-    letter-spacing: 0.25rem;
-    margin: 0 0.25rem 0 0;
-    font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-  }
-
-  .correct {
-    color: green;
-  }
-
-  .incorrect {
-    color: red;
-    font-weight: bold;
   }
 </style>

@@ -1,10 +1,14 @@
 <script>
-  export const answer = 'potatoes'
-  let hint = 'thing'
+  import { answer, guessArray, guessIndex, resultArray } from '../../../stores/dingbats'
+  const dingbat = 'potatoes'
+  answer.set(dingbat)
+  guessIndex.set(0)
+  guessArray.set([...dingbat].map((letter) => (letter === ' ' ? ' ' : '_')))
+  resultArray.set([...dingbat].map((letter) => (letter === ' ' ? ' ' : '0')))
 </script>
 
 <div class="wrapper">
-  <span class="hint">Guess the {hint}</span>
+  <span class="hint">Guess the thing</span>
   <div class="placeholder">
     <h1>PotatOOOOOOOO</h1>
   </div>

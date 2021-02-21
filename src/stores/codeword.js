@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store'
+import { writable, derived, get } from 'svelte/store'
 import { createCodeword } from '../api'
 import { randomInt } from '../utils'
 
@@ -91,12 +91,4 @@ function createSolution() {
       localStorage.setItem('codeword_solution', JSON.stringify(startingSolution))
     },
   }
-}
-
-// wrapper around the store to simplify reads from within this store
-function get(store) {
-  let value
-  const unsubscribe = store.subscribe((s) => (value = s))
-  unsubscribe()
-  return value
 }

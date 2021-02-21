@@ -1,10 +1,14 @@
 <script>
-  export const answer = 'what goes up must come down'
-  let hint = 'phrase'
+  import { answer, guessArray, guessIndex, resultArray } from '../../../stores/dingbats'
+  const dingbat = 'what goes up must come down'
+  answer.set(dingbat)
+  guessIndex.set(0)
+  guessArray.set([...dingbat].map((letter) => (letter === ' ' ? ' ' : '_')))
+  resultArray.set([...dingbat].map((letter) => (letter === ' ' ? ' ' : '0')))
 </script>
 
 <div class="wrapper">
-  <span class="hint">Guess the {hint}</span>
+  <span class="hint">Guess the phrase</span>
   <div class="placeholder">
     <h1 class="up">WHAT</h1>
     <h1 class="down">MUST</h1>

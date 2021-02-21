@@ -4,6 +4,26 @@
   export let checked: boolean = false
 </script>
 
+<header>
+  <a href="/#">
+    <h1 class="title">Wordbits</h1>
+  </a>
+  <nav>
+    <a href="/#">Home</a>
+    |
+    <a href="#/search">Search</a>
+    |
+    <a href="#/wordsearch">Wordsearch</a>
+    |
+    <a href="#/codeword">Codeword</a>
+    |
+    <a href="#/dingbats">Dingbats</a>
+  </nav>
+  <div class="menu-btn">
+    <Hamburger bind:checked />
+  </div>
+</header>
+
 <style>
   header {
     max-width: 100vw;
@@ -40,21 +60,3 @@
     margin: 0;
   }
 </style>
-
-<header>
-  <a href="/#">
-    <h1 class="title">Wordbits</h1>
-  </a>
-  <nav>
-    <a href="/#">Home</a>
-    |
-    <a href="#/search">Search</a>
-    |
-    <a href="#/wordsearch">Wordsearch</a>
-    |
-    <a href="#/codeword">Codeword</a>
-  </nav>
-  <div class="menu-btn">
-    <Hamburger bind:checked />
-  </div>
-</header>
