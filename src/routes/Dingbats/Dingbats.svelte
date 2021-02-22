@@ -3,43 +3,29 @@
   import { elasticOut } from 'svelte/easing'
   import Keyboard from './Keyboard.svelte'
   import Guess from './Guess.svelte'
-  import { currentLevel, solved } from '../../stores/dingbats'
-
-  //#region Levels
-  import Level1 from './Levels/Level1.svelte'
-  import Level2 from './Levels/Level2.svelte'
-  //#endregion
-
-  let level
+  import { currentLevel, solved, setAnswer } from '../../stores/dingbats'
 
   $: {
-    switch ($currentLevel) {
-      case '1':
-        level = Level1
-        break
-      case '2':
-        level = Level2
-        break
-      default:
-        level = Level1
-    }
-    console.log($currentLevel)
+    setAnswer($currentLevel.answer)
   }
 </script>
 
 <div in:fade={{ duration: 500 }} class="page">
-  <svelte:component this={level} />
-  <Guess />
-  {#if $solved}
-    <div in:scale={{ duration: 500, easing: elasticOut }} class="completed">
-      <h1>Well Done!</h1>
-      <p>
-        <a href="#/dingbats" on:click={() => location.reload()}>Try another</a>
-      </p>
-    </div>
-  {:else}
-    <Keyboard />
+  {#if currentLevel}
+    <svelte:component this={$currentLevel.template} title={$currentLevel.title} dingbat={$currentLevel.dingbat} />
+    <Guess />
+    {#if $solved}
+      <div in:scale={{ duration: 500, easing: elasticOut }} class="completed">
+        <h1>Well Done!</h1>
+        <p>
+          <a href="#/dingbats" on:click={() => location.reload()}>Try another</a>
+        </p>
+      </div>
+    {:else}
+      <Keyboard />
+    {/if}
   {/if}
+
 </div>
 
 <style>

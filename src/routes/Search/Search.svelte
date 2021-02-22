@@ -28,6 +28,7 @@
 
     if (letters && routeParts > 1) {
       value = letters.replace('%2F', '/')
+      value = value.replaceAll('_', '.')
     } else {
       value = ''
     }
@@ -36,6 +37,36 @@
 
   onDestroy(unsubscribe)
 </script>
+
+<div in:fade={{ duration: 500 }} class="page">
+
+  <Input bind:value on:submit={() => push(`/search/${value}`)} on:click={() => push('/search')} />
+  {#await $search}
+    <p>Searching...</p>
+  {:then data}
+    {#if data}
+      <Results {data} />
+    {/if}
+  {:catch error}
+    <p>Error, try again - {error}</p>
+  {/await}
+
+  {#if !params.letters}
+    Here's how it works...
+    <p>
+      {#each examples as example, i}
+        <a href="#/search/{example.link}" style="--bg-color:{exampleColors[i]}">
+          <div>
+            <b>{example.letters}</b>
+            <p>{example.description}</p>
+          </div>
+          <div class="badge">{example.count}</div>
+        </a>
+      {/each}
+    </p>
+  {/if}
+
+</div>
 
 <style>
   .page {
@@ -76,33 +107,3 @@
     margin-left: auto;
   }
 </style>
-
-<div in:fade={{ duration: 500 }} class="page">
-
-  <Input bind:value on:submit={() => push(`/search/${value}`)} on:click={() => push('/search')} />
-  {#await $search}
-    <p>Searching...</p>
-  {:then data}
-    {#if data}
-      <Results {data} />
-    {/if}
-  {:catch error}
-    <p>Error, try again - {error}</p>
-  {/await}
-
-  {#if !params.letters}
-    Here's how it works...
-    <p>
-      {#each examples as example, i}
-        <a href="#/search/{example.link}" style="--bg-color:{exampleColors[i]}">
-          <div>
-            <b>{example.letters}</b>
-            <p>{example.description}</p>
-          </div>
-          <div class="badge">{example.count}</div>
-        </a>
-      {/each}
-    </p>
-  {/if}
-
-</div>

@@ -10,9 +10,10 @@
     {#if ['1', '2'].includes(result)}
       <span class:correct={result === '1'} class:incorrect={result === '2'}>{$guessArray[i]}</span>
     {:else if result === ' '}
-      <span>&nbsp;</span>
       {#if i === splitLineChar}
         <div class="break" />
+      {:else}
+        <span>&nbsp;</span>
       {/if}
     {:else}
       <span>{'_'}</span>
@@ -25,7 +26,7 @@
     font-family: monospace;
     letter-spacing: 0.25rem;
     margin: 0 0.25rem 0 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

@@ -1,18 +1,31 @@
 import { writable, derived, get } from 'svelte/store'
+import { levels } from '../routes/Dingbats/Levels/levels'
 
 export const answer = writable('')
 export const guessArray = writable([])
 export const resultArray = writable([])
 export const guessIndex = writable(0)
-export const currentLevel = writable(localStorage.getItem('dingbats_level') || '1')
+export const currentLevel = writable(levels[+localStorage.getItem('dingbats_level') - 1] || levels[0])
 
 export const solved = derived([answer, guessArray], ([$answer, $guessArray]) => {
+  if (!$answer) return false
   const result = $answer.toUpperCase() === $guessArray.join('') && $guessArray.length > 0
 
-  if (result) localStorage.setItem('dingbats_level', +get(currentLevel) + 1)
+  if (result) {
+    let nextLevel = +localStorage.getItem('dingbats_level') + 1 || 1
+    if (nextLevel > levels.length) nextLevel = 1
+    localStorage.setItem('dingbats_level', nextLevel)
+  }
 
   return result
 })
+
+export function setAnswer(phrase) {
+  answer.set(phrase)
+  guessIndex.set(0)
+  guessArray.set([...phrase].map((letter) => (letter === ' ' ? ' ' : '_')))
+  resultArray.set([...phrase].map((letter) => (letter === ' ' ? ' ' : '0')))
+}
 
 export function handleKey(e) {
   let key = e.target.value
