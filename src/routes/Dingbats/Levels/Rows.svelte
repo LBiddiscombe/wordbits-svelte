@@ -3,44 +3,30 @@
   export let dingbat = ''
 </script>
 
-<div class="wrapper">
-  <div class="title">{title}</div>
-  <div class="column">
-    <div class="row">
-      {@html dingbat}
-    </div>
-  </div>
+<div class="dingbat">
+  {@html dingbat}
 </div>
 
 <style>
-  .wrapper {
-    display: grid;
-    place-items: center;
-    padding: 2rem;
-  }
-
-  .title {
-    margin-bottom: 0.5rem;
-  }
-
-  .column {
-    display: grid;
-    grid-template: 1fr;
-    place-items: center;
-    border: 1px solid darkgray;
-    padding: 1rem;
-    min-width: 300px;
-  }
-
-  .row {
+  .dingbat {
     display: grid;
     font-size: 2rem;
     place-items: center;
     padding: 1rem;
+    border: 1px solid darkgray;
+    min-width: 300px;
   }
 
   :global(.dingbat-tight) {
     margin-top: -0.5rem;
     margin-bottom: -0.5rem;
+  }
+
+  :global(.dingbat-start) {
+    justify-self: start;
+  }
+
+  :global(.dingbat-end) {
+    justify-self: end;
   }
 </style>

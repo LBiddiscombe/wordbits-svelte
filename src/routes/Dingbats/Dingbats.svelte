@@ -12,7 +12,13 @@
 
 <div in:fade={{ duration: 500 }} class="page">
   {#if currentLevel}
-    <svelte:component this={$currentLevel.template} title={$currentLevel.title} dingbat={$currentLevel.dingbat} />
+    <div class="wrapper">
+      <div class="title">
+        Guess the
+        <b>{$currentLevel.title}</b>
+      </div>
+      <svelte:component this={$currentLevel.template} dingbat={$currentLevel.dingbat} />
+    </div>
     <Guess />
     {#if $solved}
       <div in:scale={{ duration: 500, easing: elasticOut }} class="completed">
@@ -47,6 +53,16 @@
     background-color: var(--color-foreground);
     color: var(--color-background);
     text-align: center;
+  }
+
+  .wrapper {
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+  }
+
+  .title {
+    margin-bottom: 1rem;
   }
 
   a {
