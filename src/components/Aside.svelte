@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from 'svelte-awesome'
-  import { faHome, faSearch, faTrophy, faEraser, faAdjust } from '@fortawesome/free-solid-svg-icons'
+  import { faHome, faSearch, faTrophy, faPuzzlePiece, faEraser, faAdjust } from '@fortawesome/free-solid-svg-icons'
   import { getLocalStorageSize } from '../utils'
 
   export let open: boolean = false
@@ -23,7 +23,39 @@
   }
 </script>
 
-<style>
+<aside class:open>
+  <a href="#/" class="item" on:click>
+    <Icon data={faHome} scale="2" class="icon" />
+    <span>Home</span>
+  </a>
+  <a href="#/search" class="item" on:click>
+    <Icon data={faSearch} scale="2" class="icon" />
+    <span>Search</span>
+  </a>
+  <a href="#/wordsearch" class="item" on:click>
+    <Icon data={faTrophy} scale="2" class="icon" />
+    <span>Wordsearch</span>
+  </a>
+  <a href="#/codeword" class="item" on:click>
+    <Icon data={faTrophy} scale="2" class="icon" />
+    <span>Codeword</span>
+  </a>
+  <a href="#/dingbats" class="item" on:click>
+    <Icon data={faPuzzlePiece} scale="2" class="icon" />
+    <span>Dingbats</span>
+  </a>
+  <p />
+  <button on:click={clearCache}>
+    <Icon data={faEraser} scale="2" class="icon" />
+    <span>Clear Cache ({used})</span>
+  </button>
+  <button on:click={toggleTheme}>
+    <Icon data={faAdjust} scale="2" class="icon" />
+    <span>Toggle Theme</span>
+  </button>
+</aside>
+
+<aside>
   aside {
     position: fixed;
     top: var(--header-height);
@@ -83,32 +115,4 @@
     justify-self: left;
     font-size: 1.25rem;
   }
-</style>
-
-<aside class:open>
-  <a href="#/" class="item" on:click>
-    <Icon data={faHome} scale="2" class="icon" />
-    <span>Home</span>
-  </a>
-  <a href="#/search" class="item" on:click>
-    <Icon data={faSearch} scale="2" class="icon" />
-    <span>Search</span>
-  </a>
-  <a href="#/wordsearch" class="item" on:click>
-    <Icon data={faTrophy} scale="2" class="icon" />
-    <span>Wordsearch</span>
-  </a>
-  <a href="#/codeword" class="item" on:click>
-    <Icon data={faTrophy} scale="2" class="icon" />
-    <span>Codeword</span>
-  </a>
-  <p />
-  <button on:click={clearCache}>
-    <Icon data={faEraser} scale="2" class="icon" />
-    <span>Clear Cache ({used})</span>
-  </button>
-  <button on:click={toggleTheme}>
-    <Icon data={faAdjust} scale="2" class="icon" />
-    <span>Toggle Theme</span>
-  </button>
 </aside>
