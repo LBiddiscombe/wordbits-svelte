@@ -22,7 +22,11 @@
     background-color: var(--color-background);
     width: 100vw;
     max-width: 500px;
-    user-select: none;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none;
   }
 
   .keyboard {
