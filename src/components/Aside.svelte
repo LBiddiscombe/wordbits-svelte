@@ -55,7 +55,7 @@
   </button>
 </aside>
 
-<aside>
+<style>
   aside {
     position: fixed;
     top: var(--header-height);
@@ -115,4 +115,4 @@
     justify-self: left;
     font-size: 1.25rem;
   }
-</aside>
+</style>
