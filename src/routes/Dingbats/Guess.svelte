@@ -7,8 +7,8 @@
 
 <div class="answer-bar">
   {#each $resultArray as result, i}
-    {#if ['1', '2'].includes(result)}
-      <span class:correct={result === '1'} class:incorrect={result === '2'}>{$guessArray[i]}</span>
+    {#if [true, false].includes(result)}
+      <span class:correct={result} class:incorrect={!result}>{$guessArray[i]}</span>
     {:else if result === ' '}
       {#if i === splitLineChar}
         <div class="break" />

@@ -30,11 +30,11 @@
     min-width: 300px;
   }
 
-  :global(.db-rotate-up) {
+  :global(.dingbat-rotate-up) {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
   }
-  :global(.db-rotate-down) {
+  :global(.dingbat-rotate-down) {
     writing-mode: vertical-rl;
   }
 </style>

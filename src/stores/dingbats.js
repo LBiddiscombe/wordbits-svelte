@@ -25,7 +25,7 @@ export function setAnswer(phrase) {
   answer.set(phrase)
   guessIndex.set(0)
   guessArray.set([...phrase].map((letter) => (letter === ' ' ? ' ' : '_')))
-  resultArray.set([...phrase].map((letter) => (letter === ' ' ? ' ' : '0')))
+  resultArray.set([...phrase].map((letter) => (letter === ' ' ? ' ' : null)))
 }
 
 export function handleKey(e) {
@@ -38,11 +38,11 @@ export function handleKey(e) {
     const charsToRemove = currentGuess[currentIndex - 1] === ' ' ? 2 : 1
     currentIndex = Math.max(currentIndex - charsToRemove, 0)
     currentGuess[currentIndex] = '_'
-    currentResult[currentIndex] = '0'
+    currentResult[currentIndex] = null
   } else {
     if (currentIndex < currentGuess.length) {
       currentGuess[currentIndex] = key
-      currentResult[currentIndex] = key === get(answer).charAt(currentIndex).toUpperCase() ? '1' : '2'
+      currentResult[currentIndex] = key === get(answer).charAt(currentIndex).toUpperCase() ? true : false
       currentIndex = Math.min(currentIndex + 1, currentGuess.length)
     }
     if (currentGuess[currentIndex] === ' ') currentIndex++

@@ -38,4 +38,9 @@
     place-items: center;
     padding: 1rem;
   }
+
+  :global(.dingbat-tight) {
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+  }
 </style>

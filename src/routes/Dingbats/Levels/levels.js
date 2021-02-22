@@ -1,7 +1,7 @@
 import Rows from './Rows.svelte'
 import Columns from './Columns.svelte'
 
-export const levels = [
+const levels1to10 = [
   {
     title: 'Guess the phrase',
     answer: 'good looking',
@@ -47,7 +47,7 @@ export const levels = [
   {
     title: 'Guess the phrase',
     answer: 'what goes up must come down',
-    dingbat: '<div class="db-rotate-up">WHAT</div><div class="db-rotate-down">MUST</div>',
+    dingbat: '<div class="dingbat-rotate-up">WHAT</div><div class="dingbat-rotate-down">MUST</div>',
     template: Columns,
   },
   {
@@ -63,3 +63,21 @@ export const levels = [
     template: Rows,
   },
 ]
+
+const levels11to20 = [
+  {
+    title: 'Guess the thing',
+    answer: 'car',
+    dingbat: '<span>🐱 - T + R</span>',
+    template: Rows,
+  },
+  {
+    title: 'Guess the phrase',
+    answer: 'centre of gravity',
+    dingbat:
+      '<div class="dingbat-tight">⬇</div><div class="dingbat-tight">GRAVITY</div><div class="dingbat-tight">⬆</div>',
+    template: Rows,
+  },
+]
+
+export const levels = [...levels1to10, ...levels11to20]
