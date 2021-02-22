@@ -22,6 +22,7 @@
     background-color: var(--color-background);
     width: 100vw;
     max-width: 500px;
+    user-select: none;
   }
 
   .keyboard {

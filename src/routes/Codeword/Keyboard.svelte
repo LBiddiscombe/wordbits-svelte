@@ -13,6 +13,30 @@
   }
 </script>
 
+<div class="keyboard-wrapper">
+  <div class="btn-bar">
+    <button on:click={() => showErrors.set(true)}>Show Errors</button>
+    <button class="reset" on:click={handleReset}>Reset</button>
+  </div>
+  <div class="keyboard">
+    {#each keyboard as row}
+      <div class="row">
+        {#each row as key}
+          <button
+            disabled={$startingSolution.includes(key)}
+            class="key"
+            class:solved={solved.includes(key) && !$startingSolution.includes(key)}
+            value={key}
+            on:click={selectKey}
+          >
+            {key}
+          </button>
+        {/each}
+      </div>
+    {/each}
+  </div>
+</div>
+
 <style>
   .keyboard-wrapper {
     display: flex;
@@ -33,6 +57,7 @@
     .keyboard-wrapper {
       position: fixed;
       bottom: 0.5rem;
+      user-select: none;
     }
   }
 
@@ -93,26 +118,3 @@
     border: none;
   }
 </style>
-
-<div class="keyboard-wrapper">
-  <div class="btn-bar">
-    <button on:click={() => showErrors.set(true)}>Show Errors</button>
-    <button class="reset" on:click={handleReset}>Reset</button>
-  </div>
-  <div class="keyboard">
-    {#each keyboard as row}
-      <div class="row">
-        {#each row as key}
-          <button
-            disabled={$startingSolution.includes(key)}
-            class="key"
-            class:solved={solved.includes(key) && !$startingSolution.includes(key)}
-            value={key}
-            on:click={selectKey}>
-            {key}
-          </button>
-        {/each}
-      </div>
-    {/each}
-  </div>
-</div>
