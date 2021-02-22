@@ -12,7 +12,8 @@ export const solved = derived([answer, guessArray], ([$answer, $guessArray]) => 
   const result = $answer.toUpperCase() === $guessArray.join('') && $guessArray.length > 0
 
   if (result) {
-    let nextLevel = +localStorage.getItem('dingbats_level') + 1 || 1
+    console.log(+localStorage.getItem('dingbats_level'))
+    let nextLevel = Math.max(+localStorage.getItem('dingbats_level'), 1) + 1
     if (nextLevel > levels.length) nextLevel = 1
     localStorage.setItem('dingbats_level', nextLevel)
   }
