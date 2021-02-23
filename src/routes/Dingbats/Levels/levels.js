@@ -91,6 +91,18 @@ const levels11to20 = [
     dingbat: '<div>m ce</div><div>m ce</div><div>m ce</div>',
     template: Rows,
   },
+  {
+    title: 'phrase',
+    answer: 'all around the world',
+    dingbat: '<div>all</div><div>all <b>world</b> all</div><div>all</div>',
+    template: Rows,
+  },
+  {
+    title: 'phrase',
+    answer: 'search high and low',
+    dingbat: '<div class="dingbat-up">search</div><div class="dingbat-down">and</div>',
+    template: Rows,
+  },
 ]
 
 export const levels = [...levels1to10, ...levels11to20]

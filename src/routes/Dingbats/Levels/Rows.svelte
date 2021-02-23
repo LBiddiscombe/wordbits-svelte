@@ -29,4 +29,18 @@
   :global(.dingbat-end) {
     justify-self: end;
   }
+
+  :global(.dingbat-up) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 5rem;
+  }
+
+  :global(.dingbat-down) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 5rem;
+  }
 </style>

@@ -3,7 +3,7 @@
   import { elasticOut } from 'svelte/easing'
   import Keyboard from './Keyboard.svelte'
   import Guess from './Guess.svelte'
-  import { currentLevel, solved, setAnswer } from '../../stores/dingbats'
+  import { currentLevel, progress, solved, setAnswer } from '../../stores/dingbats'
 
   $: {
     setAnswer($currentLevel.answer)
@@ -13,6 +13,7 @@
 <div in:fade={{ duration: 500 }} class="page">
   {#if currentLevel}
     <div class="wrapper">
+      <div class="title">{$progress}</div>
       <div class="title">
         Guess the
         <b>{$currentLevel.title}</b>

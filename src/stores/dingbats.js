@@ -6,6 +6,10 @@ export const guessArray = writable([])
 export const resultArray = writable([])
 export const guessIndex = writable(0)
 export const currentLevel = writable(levels[+localStorage.getItem('dingbats_level') - 1] || levels[0])
+export const progress = derived(currentLevel, ($currentLevel) => {
+  const level = +localStorage.getItem('dingbats_level') || 1
+  return `${level} of ${levels.length}`
+})
 
 export const solved = derived([answer, guessArray], ([$answer, $guessArray]) => {
   if (!$answer) return false
